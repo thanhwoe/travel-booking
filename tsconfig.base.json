@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@shared/constants/*": ["libs/constants/src/*"],
+      "@shared/ui/*": ["libs/ui/src/*"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
