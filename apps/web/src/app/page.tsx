@@ -1,4 +1,5 @@
-import { Button } from '@shared/ui/components';
+import { Button, Input } from '@shared/ui/components';
+import { SearchIcon } from '@shared/ui/icons';
 
 export default function Index() {
   /*
@@ -16,7 +17,15 @@ export default function Index() {
               Welcome web 👋
             </h1>
           </div>
-          <Button>my button</Button>
+          <Input
+            placeholder="searhc..."
+            h={52}
+            leftIcon={<SearchIcon />}
+            secureTextEntry
+          />
+          <Button leftIcon={<SearchIcon />} rightIcon={<SearchIcon />}>
+            my button
+          </Button>
           <div id="hero" className="rounded">
             <div className="text-container">
               <h2>
