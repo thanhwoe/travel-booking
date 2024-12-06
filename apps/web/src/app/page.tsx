@@ -1,12 +1,18 @@
-import { Button, Input } from '@shared/ui/components';
+'use client';
+
 import { SearchIcon } from '@shared/ui/icons';
+import {
+  Button,
+  Input,
+  Text,
+  FilterPopup,
+  AccordionFilter,
+} from '@shared/ui/components';
+import { useState } from 'react';
 
 export default function Index() {
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./index.tailwind file.
-   */
+  const [open, setOpen] = useState(false);
+
   return (
     <div>
       <div className="wrapper">
@@ -21,11 +27,13 @@ export default function Index() {
             placeholder="searhc..."
             h={52}
             leftIcon={<SearchIcon />}
-            secureTextEntry
+            errorMessage="sss"
           />
-          <Button leftIcon={<SearchIcon />} rightIcon={<SearchIcon />}>
-            my button
-          </Button>
+          <Button onPress={() => setOpen(true)}>my button</Button>
+          <FilterPopup open={open} onOpenChange={setOpen} />
+          <div style={{ height: 100 }} />
+          <AccordionFilter />
+
           <div id="hero" className="rounded">
             <div className="text-container">
               <h2>

@@ -9,39 +9,37 @@ import {
   GetRef,
   Text,
   Stack,
-  Button,
 } from 'tamagui';
 
 // Components
 import { EyeOnIcon, EyeOffIcon } from '../../../icons';
 
-const StyledIconWrapper = styled(Button, {
-  padding: 0,
-  bottom: '50%',
+const StyledStack = styled(Stack, {
+  borderWidth: '$px',
+  borderColor: '$grey30',
+  borderRadius: '$1',
+  overflow: 'hidden',
+  justifyContent: 'center',
+  '$platform-native': {
+    paddingVertical: '$2',
+  },
+});
 
-  // transform: [{ translateY: '50%' }],
+const StyledIconWrapper = styled(Stack, {
+  padding: 0,
   position: 'absolute',
-  backgroundColor: 'transparent',
-  hoverStyle: {
-    backgroundColor: 'transparent',
-  },
-  focusStyle: {
-    backgroundColor: 'transparent',
-  },
 });
 
 const StyledInput = styled(InputBase, {
   backgroundColor: 'transparent',
-
-  borderColor: '$grey30',
+  flexGrow: 1,
+  selectionColor: 'black',
   placeholderTextColor: '$grey30',
   textOverflow: 'ellipsis',
   fontSize: '$4.5',
-  lineHeight: 28,
-  borderWidth: '$px',
+  borderWidth: '$0',
   height: 'auto',
   paddingHorizontal: '$5',
-  borderRadius: '$1',
   '$platform-native': {
     height: 'auto',
   },
@@ -70,7 +68,9 @@ interface InputProps extends GetProps<typeof StyledInput> {
   errorMessage?: string;
   containerStyle?: GetProps<typeof Stack>;
   leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
   onPressRightIcon?: () => void;
+  onPressLeftIcon?: () => void;
 }
 
 const InputComponent = forwardRef<TamaguiElement, InputProps>(
@@ -81,7 +81,9 @@ const InputComponent = forwardRef<TamaguiElement, InputProps>(
       secureTextEntry,
       containerStyle,
       leftIcon,
+      rightIcon,
       onPressRightIcon,
+      onPressLeftIcon,
       ...props
     },
     ref
@@ -110,26 +112,31 @@ const InputComponent = forwardRef<TamaguiElement, InputProps>(
     const onPressSecureIcon = () => setIsHide((pre) => !pre);
 
     return (
-      <>
-        <Stack {...containerStyle}>
+      <Stack>
+        <StyledStack {...containerStyle}>
           <StyledInput {...inputProps} secureTextEntry={isHide} />
-          {secureTextEntry && (
+          {!rightIcon && secureTextEntry && (
             <StyledIconWrapper right={15} onPress={onPressSecureIcon}>
               {isHide ? <EyeOnIcon /> : <EyeOffIcon />}
             </StyledIconWrapper>
           )}
+          {rightIcon && (
+            <StyledIconWrapper right={15} onPress={onPressRightIcon}>
+              {rightIcon}
+            </StyledIconWrapper>
+          )}
           {leftIcon && (
-            <StyledIconWrapper left={15} onPress={onPressRightIcon}>
+            <StyledIconWrapper left={15} onPress={onPressLeftIcon}>
               {leftIcon}
             </StyledIconWrapper>
           )}
-        </Stack>
+        </StyledStack>
         {errorMessage && (
           <Text color="$red10" mt="$2" fontSize="$3.5" fontWeight="400">
             {errorMessage}
           </Text>
         )}
-      </>
+      </Stack>
     );
   }
 );

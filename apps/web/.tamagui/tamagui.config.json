@@ -46931,6 +46931,27 @@
           "name": "c-grey40",
           "val": "#A7ADB7FF",
           "variable": "var(--c-grey40)"
+        },
+        "grey50": {
+          "isVar": true,
+          "key": "$grey50",
+          "name": "c-grey50",
+          "val": "#DEE1E6FF",
+          "variable": "var(--c-grey50)"
+        },
+        "grey60": {
+          "isVar": true,
+          "key": "$grey60",
+          "name": "c-grey60",
+          "val": "#F8F9FAFF",
+          "variable": "var(--c-grey60)"
+        },
+        "text": {
+          "isVar": true,
+          "key": "$text",
+          "name": "c-text",
+          "val": "#171A1FFF",
+          "variable": "var(--c-text)"
         }
       },
       "space": {
@@ -49978,6 +49999,27 @@
         "name": "c-grey40",
         "val": "#A7ADB7FF",
         "variable": "var(--c-grey40)"
+      },
+      "$color.grey50": {
+        "isVar": true,
+        "key": "$grey50",
+        "name": "c-grey50",
+        "val": "#DEE1E6FF",
+        "variable": "var(--c-grey50)"
+      },
+      "$color.grey60": {
+        "isVar": true,
+        "key": "$grey60",
+        "name": "c-grey60",
+        "val": "#F8F9FAFF",
+        "variable": "var(--c-grey60)"
+      },
+      "$color.text": {
+        "isVar": true,
+        "key": "$text",
+        "name": "c-text",
+        "val": "#171A1FFF",
+        "variable": "var(--c-text)"
       },
       "$space.0": {
         "isVar": true,

@@ -44240,7 +44240,10 @@ var colorPalette = {
   grey10: "#9095A0FF",
   grey20: "#565E6CFF",
   grey30: "#BCC1CAFF",
-  grey40: "#A7ADB7FF"
+  grey40: "#A7ADB7FF",
+  grey50: "#DEE1E6FF",
+  grey60: "#F8F9FAFF",
+  text: "#171A1FFF"
 };
 
 // ../../libs/ui/src/themes/tamagui.config.ts
