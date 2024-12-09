@@ -19,6 +19,7 @@
     "types": ["jest", "node"],
     "paths": {
       "@shared/constants/*": ["libs/constants/src/*"],
+      "@shared/interfaces/*": ["libs/interfaces/src/*"],
       "@shared/ui/*": ["libs/ui/src/*"]
     }
   },

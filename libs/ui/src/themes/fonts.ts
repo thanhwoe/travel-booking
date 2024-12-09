@@ -16,6 +16,7 @@ export const fontConfig = {
 };
 
 export const getFontFace = (fontFamily = 'OpenSans') => ({
+  family: fontFamily,
   normal: { normal: `${fontFamily}-Regular` },
   bold: { normal: `${fontFamily}-Bold` },
   300: { normal: `${fontFamily}-Light` },

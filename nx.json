@@ -29,7 +29,6 @@
         "syncDepsTargetName": "sync-deps"
       }
     },
-
     {
       "plugin": "@nx/vite/plugin",
       "options": {

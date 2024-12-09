@@ -6,3 +6,5 @@ export * from './ChevronLeftIcon';
 export * from './ChevronRightIcon';
 export * from './ChevronDownIcon';
 export * from './CheckIcon';
+export * from './HeartIcon';
+export * from './StarIcon';

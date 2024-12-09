@@ -34253,7 +34253,7 @@
   "tamaguiConfig": {
     "fonts": {
       "heading": {
-        "family": "Montserrat-Regular",
+        "family": "Montserrat",
         "size": {
           "0": 0,
           "1": 4,
@@ -34492,10 +34492,10 @@
         },
         "face": {
           "100": {
-            "normal": "Montserrat-Regular"
+            "normal": "Montserrat"
           },
           "200": {
-            "normal": "Montserrat-Regular"
+            "normal": "Montserrat"
           },
           "300": {
             "normal": "Montserrat-Light"
@@ -34518,6 +34518,7 @@
           "900": {
             "normal": "Montserrat-Bold"
           },
+          "family": "Montserrat",
           "normal": {
             "normal": "Montserrat-Regular"
           },
@@ -34527,7 +34528,7 @@
         }
       },
       "body": {
-        "family": "OpenSans-Regular",
+        "family": "Montserrat",
         "size": {
           "0": 0,
           "1": 4,
@@ -34766,37 +34767,38 @@
         },
         "face": {
           "100": {
-            "normal": "OpenSans-Regular"
+            "normal": "Montserrat"
           },
           "200": {
-            "normal": "OpenSans-Regular"
+            "normal": "Montserrat"
           },
           "300": {
-            "normal": "OpenSans-Light"
+            "normal": "Montserrat-Light"
           },
           "400": {
-            "normal": "OpenSans-Regular"
+            "normal": "Montserrat-Regular"
           },
           "500": {
-            "normal": "OpenSans-Regular"
+            "normal": "Montserrat-Regular"
           },
           "600": {
-            "normal": "OpenSans-Regular"
+            "normal": "Montserrat-Regular"
           },
           "700": {
-            "normal": "OpenSans-Bold"
+            "normal": "Montserrat-Bold"
           },
           "800": {
-            "normal": "OpenSans-Bold"
+            "normal": "Montserrat-Bold"
           },
           "900": {
-            "normal": "OpenSans-Bold"
+            "normal": "Montserrat-Bold"
           },
+          "family": "Montserrat",
           "normal": {
-            "normal": "OpenSans-Regular"
+            "normal": "Montserrat-Regular"
           },
           "bold": {
-            "normal": "OpenSans-Bold"
+            "normal": "Montserrat-Bold"
           }
         }
       }

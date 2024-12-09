@@ -1,4 +1,7 @@
 import { NextTamaguiProvider } from '../providers/NextTamaguiProvider';
+import './global.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export const metadata = {
   title: 'Welcome to web',

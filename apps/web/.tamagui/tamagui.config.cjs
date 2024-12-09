@@ -44218,6 +44218,7 @@ var fontConfig = {
   letterSpacing: {}
 };
 var getFontFace = /* @__PURE__ */ __name((fontFamily = "OpenSans") => ({
+  family: fontFamily,
   normal: { normal: `${fontFamily}-Regular` },
   bold: { normal: `${fontFamily}-Bold` },
   300: { normal: `${fontFamily}-Light` },
@@ -44248,7 +44249,7 @@ var colorPalette = {
 
 // ../../libs/ui/src/themes/tamagui.config.ts
 var headingFont2 = (0, import_core56.createFont)({
-  family: getFontFace("Montserrat").normal.normal,
+  family: getFontFace("Montserrat").family,
   size: { ...config.fonts.heading.size, ...fontConfig.size },
   lineHeight: config.fonts.heading.lineHeight,
   weight: config.fonts.heading.weight,
@@ -44256,12 +44257,12 @@ var headingFont2 = (0, import_core56.createFont)({
   face: getFontFace("Montserrat")
 });
 var bodyFont2 = (0, import_core56.createFont)({
-  family: getFontFace().normal.normal,
+  family: getFontFace(import_core56.isWeb ? "Montserrat" : "OpenSans").family,
   size: { ...config.fonts.body.size, ...fontConfig.size },
   lineHeight: { ...config.fonts.body.lineHeight, ...fontConfig.lineHeight },
   weight: config.fonts.body.weight,
   letterSpacing: config.fonts.body.letterSpacing,
-  face: getFontFace()
+  face: getFontFace(import_core56.isWeb ? "Montserrat" : "OpenSans")
 });
 var tokens2 = (0, import_core56.createTokens)({
   color: {

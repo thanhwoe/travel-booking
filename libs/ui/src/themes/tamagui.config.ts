@@ -1,4 +1,4 @@
-import { createFont, createTamagui, createTokens } from 'tamagui';
+import { createFont, createTamagui, createTokens, isWeb } from 'tamagui';
 import { themes, config } from '@tamagui/config/v3';
 import { createMedia } from '@tamagui/react-native-media-driver';
 import { shorthands } from '@tamagui/shorthands';
@@ -8,7 +8,7 @@ import { colorPalette } from './colors';
 import { Metrics } from './metrics';
 
 const headingFont = createFont({
-  family: getFontFace('Montserrat').normal.normal,
+  family: getFontFace('Montserrat').family,
   size: { ...config.fonts.heading.size, ...fontConfig.size },
   lineHeight: config.fonts.heading.lineHeight,
   weight: config.fonts.heading.weight,
@@ -17,12 +17,12 @@ const headingFont = createFont({
 });
 
 const bodyFont = createFont({
-  family: getFontFace().normal.normal,
+  family: getFontFace(isWeb ? 'Montserrat' : 'OpenSans').family,
   size: { ...config.fonts.body.size, ...fontConfig.size },
   lineHeight: { ...config.fonts.body.lineHeight, ...fontConfig.lineHeight },
   weight: config.fonts.body.weight,
   letterSpacing: config.fonts.body.letterSpacing,
-  face: getFontFace(),
+  face: getFontFace(isWeb ? 'Montserrat' : 'OpenSans'),
 });
 
 const tokens = createTokens({
