@@ -112,7 +112,7 @@ const InputComponent = forwardRef<TamaguiElement, InputProps>(
     const onPressSecureIcon = () => setIsHide((pre) => !pre);
 
     return (
-      <Stack>
+      <Stack flexGrow={1}>
         <StyledStack {...containerStyle}>
           <StyledInput {...inputProps} secureTextEntry={isHide} />
           {!rightIcon && secureTextEntry && (

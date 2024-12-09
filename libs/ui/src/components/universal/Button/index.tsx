@@ -5,15 +5,18 @@ import { GestureResponderEvent } from 'react-native';
 
 import {
   Text,
+  Token,
   XStack,
   createStyledContext,
   styled,
   withStaticProperties,
+  GetThemeValueForKey,
 } from 'tamagui';
 
 const ButtonContext = createStyledContext({
   variant: 'primary',
   disabled: null,
+  color: null,
 });
 
 const ButtonBase = styled(XStack, {
@@ -171,10 +174,14 @@ interface ButtonProps extends ComponentProps<typeof ButtonBase> {
   isLoading?: boolean;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
+  color?: GetThemeValueForKey<'color'>;
 }
 
 export const Button = ButtonBase.styleable<ButtonProps>(
-  ({ isLoading, disabled, onPress, leftIcon, rightIcon, ...props }, ref) => {
+  (
+    { isLoading, disabled, onPress, leftIcon, rightIcon, color, ...props },
+    ref
+  ) => {
     const handlePress = (event: GestureResponderEvent) => {
       event.persist();
       requestAnimationFrame(() => onPress?.(event));
@@ -190,7 +197,7 @@ export const Button = ButtonBase.styleable<ButtonProps>(
       >
         {leftIcon && <StyledButton.Icon>{leftIcon}</StyledButton.Icon>}
 
-        <StyledButton.Text disabled={isDisabled}>
+        <StyledButton.Text disabled={isDisabled} color={color}>
           {props.children}
         </StyledButton.Text>
 

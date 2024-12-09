@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@shared/constants/*": ["libs/constants/src/*"],
+      "@shared/constants": ["libs/constants/src/index.ts"],
       "@shared/ui/*": ["libs/ui/src/*"],
       "@shared/interfaces": ["libs/interfaces/src/index.ts"]
     }

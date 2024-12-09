@@ -38,6 +38,9 @@ importers:
       '@tamagui/toast':
         specifier: ^1.118.1
         version: 1.118.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      libphonenumber-js:
+        specifier: ^1.11.16
+        version: 1.11.16
       mini-css-extract-plugin:
         specifier: ^2.9.2
         version: 2.9.2(webpack@5.97.0(@swc/core@1.5.29(@swc/helpers@0.5.15))(esbuild@0.24.0))
@@ -50,6 +53,9 @@ importers:
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
+      react-hook-form:
+        specifier: ^7.54.0
+        version: 7.54.0(react@18.3.1)
       react-native:
         specifier: 0.74.1
         version: 0.74.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.1)(react@18.3.1)
@@ -5970,6 +5976,9 @@ packages:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
 
+  libphonenumber-js@1.11.16:
+    resolution: {integrity: sha512-Noyazmt0yOvnG0OeRY45Cd1ur8G7Z0HWVkuCuKe+yysGNxPQwBAODBQQ40j0AIagi9ZWurfmmZWNlpg4h4W+XQ==}
+
   license-webpack-plugin@4.0.2:
     resolution: {integrity: sha512-771TFWFD70G1wLTC4oU2Cw4qvtmNrIw+wRvBtn+okgHl7slJVi7zfNcdmqDL72BojM30VNJ2UHylr1o77U37Jw==}
     peerDependencies:
@@ -7097,6 +7106,12 @@ packages:
     engines: {node: '>=10'}
     peerDependencies:
       react: '>=17.0.0'
+
+  react-hook-form@7.54.0:
+    resolution: {integrity: sha512-PS05+UQy/IdSbJNojBypxAo9wllhHgGmyr8/dyGQcPoiMf3e7Dfb9PWYVRco55bLbxH9S+1yDDJeTdlYCSxO3A==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18 || ^19
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -16482,6 +16497,8 @@ snapshots:
       prelude-ls: 1.2.1
       type-check: 0.4.0
 
+  libphonenumber-js@1.11.16: {}
+
   license-webpack-plugin@4.0.2(webpack@5.97.0(@swc/core@1.5.29(@swc/helpers@0.5.15))(esbuild@0.24.0)):
     dependencies:
       webpack-sources: 3.2.3
@@ -17725,6 +17742,10 @@ snapshots:
       scheduler: 0.23.2
 
   react-freeze@1.0.4(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+
+  react-hook-form@7.54.0(react@18.3.1):
     dependencies:
       react: 18.3.1
 

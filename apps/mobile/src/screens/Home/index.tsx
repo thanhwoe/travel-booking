@@ -1,14 +1,9 @@
 import { View } from 'tamagui';
-import {
-  Button,
-  Input,
-  Text,
-  FilterPopup,
-  CardItem,
-} from '@shared/ui/components';
+import { PhoneInputController, SignUpForm } from '@shared/ui/components';
 import { SafeAreaView } from 'react-native';
-import { SearchIcon } from '@shared/ui/icons';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { ISignUpForm } from '@shared/interfaces';
 
 const mockData = {
   id: '1',
@@ -27,22 +22,11 @@ const mockData = {
 
 export const HomeScreen = () => {
   const [open, setOpen] = useState(false);
+
   return (
     <SafeAreaView>
-      <View gap="$4">
-        <Text>Home</Text>
-        <Input
-          placeholder="searhc..."
-          leftIcon={<SearchIcon />}
-          rightIcon={<SearchIcon />}
-          secureTextEntry
-          errorMessage="error"
-        />
-        <Button onPress={() => setOpen(true)}>My button</Button>
-      </View>
-      <FilterPopup open={open} onOpenChange={setOpen} />
       <View px="$5">
-        <CardItem data={mockData} />
+        <SignUpForm />
       </View>
     </SafeAreaView>
   );

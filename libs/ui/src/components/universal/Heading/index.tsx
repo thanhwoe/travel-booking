@@ -11,6 +11,10 @@ export const Heading = styled(HeadingBase, {
         fontSize: '$4',
         lineHeight: 26,
       },
+      large: {
+        fontSize: '$5',
+        lineHeight: 30,
+      },
     },
   } as const,
 
