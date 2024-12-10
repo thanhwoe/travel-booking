@@ -1,14 +1,6 @@
 'use client';
 
-import { SearchIcon } from '@shared/ui/icons';
-import {
-  Button,
-  Input,
-  FilterPopup,
-  AccordionFilter,
-  ImageSlider,
-  CardItem,
-} from '@shared/ui/components';
+import { SignUpForm, Header, Footer } from '@shared/ui/components';
 import { useState } from 'react';
 
 const mockData = {
@@ -31,18 +23,17 @@ export default function Index() {
 
   return (
     <div>
-      <Input
-        placeholder="searhc..."
-        h={52}
-        leftIcon={<SearchIcon />}
-        errorMessage="sss"
-      />
-      <Button onPress={() => setOpen(true)}>my button</Button>
-      <FilterPopup open={open} onOpenChange={setOpen} />
-      <div style={{ height: 100 }} />
-      <AccordionFilter />
-
-      <CardItem data={mockData} />
+      <Header />
+      <div
+        style={{
+          alignItems: 'center',
+          justifyContent: 'center',
+          display: 'flex',
+        }}
+      >
+        <SignUpForm />
+      </div>
+      <Footer />
     </div>
   );
 }

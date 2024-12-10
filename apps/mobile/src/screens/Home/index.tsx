@@ -1,5 +1,9 @@
 import { View } from 'tamagui';
-import { PhoneInputController, SignUpForm } from '@shared/ui/components';
+import {
+  PhoneInputController,
+  SignInForm,
+  SignUpForm,
+} from '@shared/ui/components';
 import { SafeAreaView } from 'react-native';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -26,7 +30,8 @@ export const HomeScreen = () => {
   return (
     <SafeAreaView>
       <View px="$5">
-        <SignUpForm />
+        {/* <SignUpForm /> */}
+        <SignInForm />
       </View>
     </SafeAreaView>
   );

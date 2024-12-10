@@ -16,6 +16,7 @@ import {
 import { Text } from '../Text';
 
 interface InputControllerProps<T extends FieldValues> {
+  label: string;
   name: Path<T>;
   control: Control<T>;
   rules?: RegisterOptions<T>;
@@ -26,6 +27,7 @@ const Component = <T extends FieldValues>({
   name,
   control,
   rules,
+  label,
   containerStyle,
   ...props
 }: InputControllerProps<T>) => {
@@ -79,7 +81,7 @@ const Component = <T extends FieldValues>({
   return (
     <YStack aria-invalid={!!error?.message} {...containerStyle}>
       <Text mb="$2" size="large">
-        Enter your mobile number:
+        {label}
       </Text>
       <XStack gap="$4">
         <CountryCodeSelector
@@ -94,12 +96,17 @@ const Component = <T extends FieldValues>({
           value={phoneNumber}
           onChangeText={handleFormatPhoneNumber}
           inputMode="tel"
+          h={52}
           placeholder="+1 Mobile number"
-          errorMessage={error?.message}
           onBlur={onBlur}
           {...props}
         />
       </XStack>
+      {error?.message && (
+        <Text color="$red10" mt="$2" fontSize="$3.5" fontWeight="400">
+          {error?.message}
+        </Text>
+      )}
     </YStack>
   );
 };

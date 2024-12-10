@@ -4,10 +4,22 @@ import { AppStackParamList } from '../interfaces';
 import { StatusBar } from 'react-native';
 import { SCREENS } from '../constants';
 import { HomeScreen, LoginScreen } from '../screens';
+import BootSplash from 'react-native-bootsplash';
+import { useEffect } from 'react';
 
 const AppStack = createNativeStackNavigator<AppStackParamList>();
 
 export const AppNavigator = () => {
+  useEffect(() => {
+    const init = async () => {
+      // …do multiple sync or async tasks
+    };
+
+    init().finally(async () => {
+      await BootSplash.hide({ fade: true });
+    });
+  }, []);
+
   return (
     <NavigationContainer>
       <StatusBar translucent backgroundColor="transparent" />

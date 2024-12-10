@@ -5,7 +5,6 @@ import { GestureResponderEvent } from 'react-native';
 
 import {
   Text,
-  Token,
   XStack,
   createStyledContext,
   styled,
@@ -24,7 +23,7 @@ const ButtonBase = styled(XStack, {
   tag: 'button',
   cursor: 'pointer',
 
-  minHeight: 44,
+  height: 44,
   width: '$full',
   borderWidth: 0,
   alignItems: 'center',

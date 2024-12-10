@@ -9,3 +9,4 @@ export * from './Image';
 export * from './ImageSlider';
 export * from './PhoneInputController';
 export * from './SignUpForm';
+export * from './SignInForm';

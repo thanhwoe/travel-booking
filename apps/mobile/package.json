@@ -16,6 +16,7 @@
     "react-native-gesture-handler": "*",
     "react-native-reanimated-carousel": "*",
     "react-native-reanimated": "*",
-    "react-native-screens": "*"
+    "react-native-screens": "*",
+    "react-native-bootsplash": "*"
   }
 }

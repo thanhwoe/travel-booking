@@ -86,6 +86,7 @@ export const CountryCodeSelector = memo<CountryCodeSelectorProps>(
               inputMode="tel"
               containerStyle={{
                 w: 105,
+                flexGrow: 1,
                 backgroundColor: '$grey50',
                 borderColor: '$grey50',
               }}
@@ -94,7 +95,14 @@ export const CountryCodeSelector = memo<CountryCodeSelectorProps>(
             />
           </Popover.Anchor>
 
-          <Popover.Content>{renderListOption}</Popover.Content>
+          <Popover.Content
+            $platform-web={{
+              maxHeight: 300,
+              borderWidth: '$px',
+            }}
+          >
+            {renderListOption}
+          </Popover.Content>
           <Popover.Adapt platform="touch">
             <Popover.Sheet modal dismissOnSnapToBottom snapPoints={[25]}>
               <Popover.Sheet.Overlay />

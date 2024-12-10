@@ -7,7 +7,6 @@ import {
   TamaguiElement,
   styled,
   GetRef,
-  Text,
   Stack,
 } from 'tamagui';
 
@@ -65,7 +64,6 @@ const StyledInput = styled(InputBase, {
 
 interface InputProps extends GetProps<typeof StyledInput> {
   isInvalid?: boolean;
-  errorMessage?: string;
   containerStyle?: GetProps<typeof Stack>;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
@@ -77,7 +75,6 @@ const InputComponent = forwardRef<TamaguiElement, InputProps>(
   (
     {
       isInvalid,
-      errorMessage,
       secureTextEntry,
       containerStyle,
       leftIcon,
@@ -131,11 +128,6 @@ const InputComponent = forwardRef<TamaguiElement, InputProps>(
             </StyledIconWrapper>
           )}
         </StyledStack>
-        {errorMessage && (
-          <Text color="$red10" mt="$2" fontSize="$3.5" fontWeight="400">
-            {errorMessage}
-          </Text>
-        )}
       </Stack>
     );
   }

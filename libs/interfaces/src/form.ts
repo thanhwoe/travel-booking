@@ -5,4 +5,5 @@ export type ISignInForm = {
 
 export type ISignUpForm = {
   phoneNumber: string;
+  password: string;
 };

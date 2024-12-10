@@ -3,6 +3,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { composePlugins, withNx } = require('@nx/next');
 const { withTamagui } = require('@tamagui/next-plugin');
+
 const tamaguiPlugin = withTamagui({
   config: '../../libs/ui/src/themes/tamagui.config',
   components: ['tamagui'],
