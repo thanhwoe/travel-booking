@@ -1,3 +1,5 @@
+'use client';
+
 import { memo } from 'react';
 import Svg, { SvgProps } from 'react-native-svg';
 import { styled, StackProps, Stack } from 'tamagui';

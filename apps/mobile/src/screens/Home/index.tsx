@@ -4,7 +4,6 @@ import {
   SignInForm,
   SignUpForm,
 } from '@shared/ui/components';
-import { SafeAreaView } from 'react-native';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ISignUpForm } from '@shared/interfaces';
@@ -28,11 +27,9 @@ export const HomeScreen = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <SafeAreaView>
-      <View px="$5">
-        {/* <SignUpForm /> */}
-        <SignInForm />
-      </View>
-    </SafeAreaView>
+    <View px="$5">
+      {/* <SignUpForm /> */}
+      <SignInForm />
+    </View>
   );
 };

@@ -3,14 +3,15 @@
 import { memo } from 'react';
 import { Token, YStack, getTokenValue } from 'tamagui';
 import { useForm } from 'react-hook-form';
-import { ISignUpForm } from '@shared/interfaces';
 import { PhoneInputController } from '../PhoneInputController';
 import { Heading } from '../Heading';
 import { Button } from '../Button';
 import { Text } from '../Text';
 import { AppleIcon, FacebookIcon, GoogleIcon } from '../../../icons';
 import { InputController } from '../InputController';
-import { FORM_RULES } from '@shared/constants';
+import { signUpSchema } from '@shared/constants';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ISignUpForm } from '@shared/interfaces';
 
 const SOCIAL_AUTH = [
   {
@@ -30,15 +31,16 @@ const SOCIAL_AUTH = [
   },
 ];
 
-export const SignUpForm = memo(() => {
+interface IProps {
+  onSubmit: (data: ISignUpForm) => void;
+}
+
+export const SignUpForm = memo<IProps>(({ onSubmit }) => {
   const { control, handleSubmit } = useForm<ISignUpForm>({
+    resolver: zodResolver(signUpSchema),
     mode: 'onBlur',
     reValidateMode: 'onBlur',
   });
-
-  const handleSignUp = (data: ISignUpForm) => {
-    console.log(data);
-  };
 
   return (
     <YStack>
@@ -49,20 +51,14 @@ export const SignUpForm = memo(() => {
         control={control}
         label="Enter your mobile number:"
         name="phoneNumber"
-        rules={FORM_RULES.phoneNumber}
       />
       <InputController<ISignUpForm>
         control={control}
         name="password"
         label="Password"
         secureTextEntry
-        rules={FORM_RULES.password}
       />
-      <Button
-        mt="$4"
-        variant="CTA"
-        onPress={() => handleSubmit(handleSignUp)()}
-      >
+      <Button mt="$4" variant="CTA" onPress={() => handleSubmit(onSubmit)()}>
         Continue
       </Button>
       <Text mx="auto" my="$3">

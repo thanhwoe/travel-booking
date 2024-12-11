@@ -1,8 +1,3 @@
-'use client';
-
-import { SignUpForm, Header, Footer } from '@shared/ui/components';
-import { useState } from 'react';
-
 const mockData = {
   id: '1',
   name: 'Superior Family Room',
@@ -19,11 +14,8 @@ const mockData = {
 };
 
 export default function Index() {
-  const [open, setOpen] = useState(false);
-
   return (
     <div>
-      <Header />
       <div
         style={{
           alignItems: 'center',
@@ -31,9 +23,8 @@ export default function Index() {
           display: 'flex',
         }}
       >
-        <SignUpForm />
+        a
       </div>
-      <Footer />
     </div>
   );
 }

@@ -8,17 +8,20 @@ import { Heading } from '../Heading';
 import { Button } from '../Button';
 import { InputController } from '../InputController';
 import { PhoneInputController } from '../PhoneInputController';
-import { FORM_RULES } from '@shared/constants';
+import { signInSchema } from '@shared/constants';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-export const SignInForm = memo(() => {
+interface IProps {
+  onSubmit: (data: ISignInForm) => void;
+}
+
+export const SignInForm = memo<IProps>(({ onSubmit }) => {
   const { control, handleSubmit, reset } = useForm<ISignInForm>({
+    resolver: zodResolver(signInSchema),
     mode: 'onBlur',
     reValidateMode: 'onBlur',
   });
 
-  const handleSignIn = (data: ISignInForm) => {
-    console.log(data);
-  };
   return (
     <YStack>
       <Heading size="large" mb={50}>
@@ -29,7 +32,6 @@ export const SignInForm = memo(() => {
         control={control}
         name="phoneNumber"
         label="Phone number"
-        rules={FORM_RULES.phoneNumber}
       />
 
       <InputController<ISignInForm>
@@ -37,13 +39,8 @@ export const SignInForm = memo(() => {
         name="password"
         label="Password"
         secureTextEntry
-        rules={FORM_RULES.password}
       />
-      <Button
-        mt="$4"
-        variant="CTA"
-        onPress={() => handleSubmit(handleSignIn)()}
-      >
+      <Button mt="$4" variant="CTA" onPress={() => handleSubmit(onSubmit)()}>
         Continue
       </Button>
     </YStack>

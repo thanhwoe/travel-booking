@@ -1,3 +1,4 @@
+'use client';
 import { XStack, YStack } from 'tamagui';
 import { Button, Text } from '../../universal';
 import Link from 'next/link';

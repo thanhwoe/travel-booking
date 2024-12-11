@@ -14,3 +14,6 @@ export * from './GoogleIcon';
 export * from './Logo';
 export * from './BellIcon';
 export * from './ChatIcon';
+export * from './GridIcon';
+export * from './ProfileIcon';
+export * from './SvgFactory';

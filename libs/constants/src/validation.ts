@@ -1,23 +1,35 @@
 import { ERROR_MESSAGE } from './messages';
 import { isValidPhoneNumber } from 'libphonenumber-js';
-export const FORM_RULES = {
-  password: {
-    required: ERROR_MESSAGE.FIELD_REQUIRED('Password'),
-    validate: (val: string) => {
-      const fieldLength = val.trim().length;
+import { z } from 'zod';
 
-      if (fieldLength < 1) {
-        return ERROR_MESSAGE.FIELD_REQUIRED('Password');
-      }
-    },
-  },
+export const signUpSchema = z.object({
+  phoneNumber: z
+    .string({
+      message: ERROR_MESSAGE.FIELD_REQUIRED('Phone number'),
+    })
+    .refine((val) => isValidPhoneNumber(val), {
+      message: ERROR_MESSAGE.FIELD_INVALID('Phone number'),
+    }),
+  password: z
+    .string({
+      message: ERROR_MESSAGE.FIELD_REQUIRED('Password'),
+    })
+    .trim()
+    .min(8, ERROR_MESSAGE.FIELD_INVALID('Password')),
+});
 
-  phoneNumber: {
-    required: ERROR_MESSAGE.FIELD_REQUIRED('Phone number'),
-    validate: (val: string) => {
-      if (!isValidPhoneNumber(val)) {
-        return ERROR_MESSAGE.FIELD_INVALID('Phone number');
-      }
-    },
-  },
-};
+export const signInSchema = z.object({
+  phoneNumber: z
+    .string({
+      message: ERROR_MESSAGE.FIELD_REQUIRED('Phone number'),
+    })
+    .refine((val) => isValidPhoneNumber(val), {
+      message: ERROR_MESSAGE.FIELD_INVALID('Phone number'),
+    }),
+  password: z
+    .string({
+      message: ERROR_MESSAGE.FIELD_REQUIRED('Password'),
+    })
+    .trim()
+    .min(8, ERROR_MESSAGE.FIELD_INVALID('Password')),
+});

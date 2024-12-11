@@ -10381,7 +10381,7 @@ var require_Platform = __commonJS({
     "use strict";
     exports2.__esModule = true;
     exports2.default = void 0;
-    var Platform3 = {
+    var Platform4 = {
       OS: "web",
       select: /* @__PURE__ */ __name((obj) => "web" in obj ? obj.web : obj.default, "select"),
       get isTesting() {
@@ -10391,7 +10391,7 @@ var require_Platform = __commonJS({
         return false;
       }
     };
-    var _default = exports2.default = Platform3;
+    var _default = exports2.default = Platform4;
     module2.exports = exports2.default;
   }
 });
@@ -44113,8 +44113,16 @@ var animations = createAnimations({
 // ../../libs/ui/src/themes/metrics.ts
 var import_react_native2 = require("@tamagui/react-native-web-lite");
 var { width, height } = import_react_native2.Dimensions.get("window");
-var screenWidth = width < height ? width : height;
-var screenHeight = width < height ? height : width;
+var screenWidth = import_react_native2.Platform.select({
+  native: width < height ? width : height,
+  web: window.innerWidth,
+  default: 0
+});
+var screenHeight = import_react_native2.Platform.select({
+  native: width < height ? height : width,
+  web: window.innerHeight,
+  default: 0
+});
 var spacing = {
   px: 1,
   "0": 0,

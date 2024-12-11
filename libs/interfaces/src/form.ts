@@ -1,9 +1,6 @@
-export type ISignInForm = {
-  phoneNumber: string;
-  password: string;
-};
+import { signInSchema, signUpSchema } from '@shared/constants';
+import { z } from 'zod';
 
-export type ISignUpForm = {
-  phoneNumber: string;
-  password: string;
-};
+export type ISignInForm = z.infer<typeof signInSchema>;
+
+export type ISignUpForm = z.infer<typeof signUpSchema>;

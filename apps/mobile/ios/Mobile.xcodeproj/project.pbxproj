@@ -12,7 +12,9 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		69D1576081DC408EA4592A6C /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CA9899411EA4992B110DA76 /* BootSplash.storyboard */; };
 		7699B88040F8A987B510C191 /* libPods-Mobile-MobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-Mobile-MobileTests.a */; };
+		7C60DE74828F42E8915C9A5B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A65386D0A13A480FA98623A6 /* Colors.xcassets */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		948FF72F058AE8AB8B951445 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 315785DC0C4A2E98E0B6A9F1 /* PrivacyInfo.xcprivacy */; };
 		C6FBABBACF944E518E24283B /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 010688DAC4244224BAEE325F /* OpenSans-Bold.ttf */; };
@@ -21,8 +23,6 @@
 		E6796383E1C44EF9AAB0CB22 /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AD9BC40291A4996986C0AD6 /* Montserrat-Light.ttf */; };
 		EAA7843DCDAD477597053B95 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EA5FAADB123490AA1599CA6 /* Montserrat-Bold.ttf */; };
 		F9FC2290372846F5B89F23A3 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8976E6ED306E47AAA46B2756 /* OpenSans-Light.ttf */; };
-		69D1576081DC408EA4592A6C /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CA9899411EA4992B110DA76 /* BootSplash.storyboard */; };
-		7C60DE74828F42E8915C9A5B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A65386D0A13A480FA98623A6 /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,14 +55,14 @@
 		5709B34CF0A7D63546082F79 /* Pods-Mobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mobile.release.xcconfig"; path = "Target Support Files/Pods-Mobile/Pods-Mobile.release.xcconfig"; sourceTree = "<group>"; };
 		5B6174A23A07420FA57FCC4A /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-Mobile-MobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mobile-MobileTests.debug.xcconfig"; path = "Target Support Files/Pods-Mobile-MobileTests/Pods-Mobile-MobileTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5CA9899411EA4992B110DA76 /* BootSplash.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = BootSplash.storyboard; path = Mobile/BootSplash.storyboard; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-Mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Mobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EA5FAADB123490AA1599CA6 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../assets/fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Mobile/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8976E6ED306E47AAA46B2756 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../assets/fonts/OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Mobile-MobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mobile-MobileTests.release.xcconfig"; path = "Target Support Files/Pods-Mobile-MobileTests/Pods-Mobile-MobileTests.release.xcconfig"; sourceTree = "<group>"; };
+		A65386D0A13A480FA98623A6 /* Colors.xcassets */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = folder.assetcatalog; name = Colors.xcassets; path = Mobile/Colors.xcassets; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		5CA9899411EA4992B110DA76 /* BootSplash.storyboard */ = {isa = PBXFileReference; name = "BootSplash.storyboard"; path = "Mobile/BootSplash.storyboard"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A65386D0A13A480FA98623A6 /* Colors.xcassets */ = {isa = PBXFileReference; name = "Colors.xcassets"; path = "Mobile/Colors.xcassets"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = folder.assetcatalog; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

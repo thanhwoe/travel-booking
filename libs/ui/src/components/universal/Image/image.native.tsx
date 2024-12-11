@@ -1,3 +1,1 @@
-import { Image } from 'tamagui';
-
-export { Image };
+export { Image } from 'tamagui';
