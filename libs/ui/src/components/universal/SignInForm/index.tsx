@@ -16,7 +16,7 @@ interface IProps {
 }
 
 export const SignInForm = memo<IProps>(({ onSubmit }) => {
-  const { control, handleSubmit, reset } = useForm<ISignInForm>({
+  const { control, handleSubmit } = useForm<ISignInForm>({
     resolver: zodResolver(signInSchema),
     mode: 'onBlur',
     reValidateMode: 'onBlur',

@@ -89,7 +89,6 @@ const Component = <T extends FieldValues>({
           onSelect={handleSelectCountryCode}
           onChange={handleChangeCountryCode}
         />
-
         <Input
           ref={phoneRef}
           defaultValue={value}

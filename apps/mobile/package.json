@@ -18,6 +18,8 @@
     "react-native-reanimated": "*",
     "react-native-screens": "*",
     "@react-navigation/bottom-tabs": "*",
+    "@react-native-async-storage/async-storage": "*",
+    "react-native-config": "*",
     "react-native-bootsplash": "*"
   }
 }

@@ -1,14 +1,12 @@
 'use client';
 import { Footer, Header } from '@shared/ui/components';
-import { Metrics } from '@shared/ui/themes';
 import { View } from 'tamagui';
-
-const { screenHeight } = Metrics;
+import { signOutAction } from '../actions/auth';
 
 export default function Template({ children }: { children: React.ReactNode }) {
   return (
-    <View minHeight={screenHeight}>
-      <Header />
+    <View h="$full">
+      <Header onSignOut={signOutAction} />
       {children}
       <Footer />
     </View>

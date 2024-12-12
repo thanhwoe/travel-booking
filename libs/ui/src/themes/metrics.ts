@@ -1,18 +1,22 @@
-import { Dimensions, Platform } from 'react-native';
+import { Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 
-const screenWidth = Platform.select({
-  native: width < height ? width : height,
-  web: window.innerWidth,
-  default: 0,
-});
+// const screenWidth = Platform.select({
+//   native: width < height ? width : height,
+//   web: window.innerWidth,
+//   default: 0,
+// });
 
-const screenHeight = Platform.select({
-  native: width < height ? height : width,
-  web: window.innerHeight,
-  default: 0,
-});
+// const screenHeight = Platform.select({
+//   native: width < height ? height : width,
+//   web: window.innerHeight,
+//   default: 0,
+// });
+
+const screenWidth = width < height ? width : height;
+
+const screenHeight = width < height ? height : width;
 
 export const spacing = {
   px: 1,

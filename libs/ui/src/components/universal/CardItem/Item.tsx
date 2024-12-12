@@ -30,7 +30,7 @@ export const CardItem = memo<IProps>(({ data, onPress }) => {
   } = data || {};
 
   return (
-    <XStack>
+    <XStack $gtLg={{ width: 840 }}>
       <ImageSlider />
 
       <YStack ml="$2.5" flexGrow={1}>

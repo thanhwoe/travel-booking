@@ -27,6 +27,9 @@ const StyledStack = styled(Stack, {
 const StyledIconWrapper = styled(Stack, {
   padding: 0,
   position: 'absolute',
+  '$platform-native': {
+    top: '50%',
+  },
 });
 
 const StyledInput = styled(InputBase, {

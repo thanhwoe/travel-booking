@@ -39,7 +39,7 @@ export const CardItem = memo<IProps>(({ data }) => {
   } = data || {};
 
   return (
-    <YStack>
+    <YStack mb="$6" mx="$5">
       <ImageSlider />
       <XStack jc="space-between" mt="$4">
         <Text fontWeight="bold">{name}</Text>

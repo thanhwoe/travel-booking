@@ -3,18 +3,15 @@ import { SCREENS } from '@shared/constants';
 import { FC } from 'react';
 import { AuthLayout } from '../../layouts/AuthLayout';
 import { SignInForm, Text } from '@shared/ui/components';
-import { ISignInForm } from '@shared/interfaces';
+import { signInAction } from '../../services/auth';
 
 type SignInScreenProps = AppStackScreenProps<typeof SCREENS.LOGIN>;
 export const LoginScreen: FC<SignInScreenProps> = ({
   navigation: { navigate },
 }) => {
-  const handleSignIn = (data: ISignInForm) => {
-    console.log({ data });
-  };
   return (
     <AuthLayout>
-      <SignInForm onSubmit={handleSignIn} />
+      <SignInForm onSubmit={signInAction} />
       <Text textAlign="center" mt="auto" size="large">
         Don't have account?{' '}
         <Text

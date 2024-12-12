@@ -4,7 +4,7 @@ import { XStack } from 'tamagui';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Navigator } from './navigator';
-import { BellIcon, ChatIcon, Logo } from '../../../icons';
+import { BellIcon, ChatIcon, Logo, LogoutIcon } from '../../../icons';
 import { Image } from '../../universal';
 
 const NAVIGATORS = [
@@ -22,7 +22,11 @@ const NAVIGATORS = [
   },
 ];
 
-export const Header = () => {
+interface IProps {
+  onSignOut?: () => void;
+}
+
+export const Header = ({ onSignOut }: IProps) => {
   const pathname = usePathname();
   return (
     <XStack px="$6" py="$0.5" jc="space-between" alignItems="center">
@@ -43,10 +47,17 @@ export const Header = () => {
           <Image
             src="/assets/images/avatar.jpeg"
             alt="avatar"
+            priority
             width={100}
             height={100}
           />
         </XStack>
+        <LogoutIcon
+          cursor="pointer"
+          onPress={() => {
+            onSignOut?.();
+          }}
+        />
       </XStack>
     </XStack>
   );

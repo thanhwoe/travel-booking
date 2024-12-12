@@ -16,8 +16,10 @@
     "baseUrl": ".",
     "paths": {
       "@shared/constants": ["libs/constants/src/index.ts"],
+      "@shared/interfaces": ["libs/interfaces/src/index.ts"],
       "@shared/ui/*": ["libs/ui/src/*"],
-      "@shared/interfaces": ["libs/interfaces/src/index.ts"]
+      "@shared/utils": ["libs/utils/src/index.ts"],
+      "@shared/stores": ["libs/stores/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

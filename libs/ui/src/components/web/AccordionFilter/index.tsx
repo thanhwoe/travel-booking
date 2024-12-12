@@ -1,9 +1,10 @@
 'use client';
 
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { Accordion, Square, XStack } from 'tamagui';
 import { Checkbox, Text } from '../../universal';
 import { ChevronDownIcon } from '../../../icons';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 
 const FILTERS = [
   {
@@ -57,9 +58,29 @@ interface IFilterGroup {
 
 export const AccordionFilter = memo(() => {
   const [filters, setFilters] = useState<IFilterGroup[]>([]);
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+
+    filters.forEach((f) => {
+      params.set(
+        f.key.replace(/ /g, '-').toLowerCase(),
+        f.value.join(',').toLowerCase()
+      );
+    });
+    replace(`${pathname}?${params.toString()}`);
+  }, [filters]);
 
   return (
-    <Accordion overflow="hidden" type="multiple" gap="$6">
+    <Accordion
+      overflow="hidden"
+      type="multiple"
+      gap="$6"
+      $gtLg={{ width: 256 }}
+    >
       {FILTERS.map((item) => {
         const itemFilters = filters.find((f) => f.key === item.label);
 

@@ -6,7 +6,7 @@ import { signUpAction } from '../actions/auth';
 
 export default function Index() {
   return (
-    <YStack ai="center" ac="center">
+    <YStack ai="center" ac="center" pt="$10">
       <SignUpForm onSubmit={signUpAction} />
       <Text textAlign="center" my={50} size="large">
         Already had an account?{' '}

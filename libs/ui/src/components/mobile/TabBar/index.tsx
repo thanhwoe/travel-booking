@@ -41,6 +41,7 @@ export const TabBar: FC<BottomTabBarProps> = ({
       alignItems="flex-start"
       justifyContent="space-between"
       borderTopWidth="$px"
+      backgroundColor="$white"
       borderTopColor="$grey50"
       left={0}
       bottom={0}

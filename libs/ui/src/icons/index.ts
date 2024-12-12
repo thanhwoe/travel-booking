@@ -17,3 +17,8 @@ export * from './ChatIcon';
 export * from './GridIcon';
 export * from './ProfileIcon';
 export * from './SvgFactory';
+export * from './FilterIcon';
+export * from './BeachIcon';
+export * from './CampingIcon';
+export * from './MountainIcon';
+export * from './LogoutIcon';

@@ -3,15 +3,19 @@ import { NavigationContainer } from '@react-navigation/native';
 import { AppStackParamList } from '../interfaces';
 import { StatusBar } from 'react-native';
 import { LoginScreen, SignupScreen } from '../screens';
-import BootSplash from 'react-native-bootsplash';
 import { BottomTabNavigator } from './bottom-tab';
 import { SCREENS } from '@shared/constants';
+import { useAuthStore } from '@shared/stores';
 
 const AppStack = createNativeStackNavigator<AppStackParamList>();
 
 export const AppNavigator = () => {
+  const user = useAuthStore.use.user();
+
+  const isAuthenticated = Boolean(user);
+
   return (
-    <NavigationContainer onReady={() => BootSplash.hide({ fade: true })}>
+    <NavigationContainer>
       <StatusBar translucent backgroundColor="transparent" />
       <AppStack.Navigator
         initialRouteName={SCREENS.LOGIN}
@@ -21,12 +25,17 @@ export const AppNavigator = () => {
           orientation: 'portrait_up',
         }}
       >
-        <AppStack.Screen name={SCREENS.LOGIN} component={LoginScreen} />
-        <AppStack.Screen name={SCREENS.SIGN_UP} component={SignupScreen} />
-        <AppStack.Screen
-          name={SCREENS.ROOT_TAB}
-          component={BottomTabNavigator}
-        />
+        {isAuthenticated ? (
+          <AppStack.Screen
+            name={SCREENS.ROOT_TAB}
+            component={BottomTabNavigator}
+          />
+        ) : (
+          <>
+            <AppStack.Screen name={SCREENS.SIGN_UP} component={SignupScreen} />
+            <AppStack.Screen name={SCREENS.LOGIN} component={LoginScreen} />
+          </>
+        )}
       </AppStack.Navigator>
     </NavigationContainer>
   );

@@ -11,6 +11,9 @@ export const Checkbox = memo<CheckboxProps>((props) => {
       borderColor="$grey20"
       overflow="hidden"
       borderRadius="$0.5"
+      focusStyle={{
+        borderColor: '$black',
+      }}
       {...props}
     >
       <TCheckbox.Indicator backgroundColor="$primary10">
