@@ -52,12 +52,10 @@ export const FilterPopup = memo<IProps>(({ open, onOpenChange }) => {
           py={15}
         >
           <XStack width="$10" />
-          <Text adjustsFontSizeToFit>Filters</Text>
-          <CloseIcon
-            onPress={() => {
-              onOpenChange(false);
-            }}
-          />
+          <Text adjustsFontSizeToFit fontWeight={'bold'}>
+            Filters
+          </Text>
+          <CloseIcon onPress={onOpenChange.bind(null, false)} />
         </XStack>
         {/* Body */}
         <Sheet.ScrollView bounces={false} scrollEventThrottle={400} px="$5">

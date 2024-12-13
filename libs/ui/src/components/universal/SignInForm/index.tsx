@@ -1,6 +1,6 @@
 'use client';
 
-import { memo } from 'react';
+import { memo, useTransition } from 'react';
 import { YStack } from 'tamagui';
 import { useForm } from 'react-hook-form';
 import { ISignInForm } from '@shared/interfaces';
@@ -16,11 +16,19 @@ interface IProps {
 }
 
 export const SignInForm = memo<IProps>(({ onSubmit }) => {
+  const [isPending, startTransition] = useTransition();
+
   const { control, handleSubmit } = useForm<ISignInForm>({
     resolver: zodResolver(signInSchema),
     mode: 'onBlur',
     reValidateMode: 'onBlur',
   });
+
+  const handleSubmitForm = (data: ISignInForm) => {
+    startTransition(() => {
+      onSubmit(data);
+    });
+  };
 
   return (
     <YStack>
@@ -40,7 +48,12 @@ export const SignInForm = memo<IProps>(({ onSubmit }) => {
         label="Password"
         secureTextEntry
       />
-      <Button mt="$4" variant="CTA" onPress={() => handleSubmit(onSubmit)()}>
+      <Button
+        isLoading={isPending}
+        mt="$4"
+        variant="CTA"
+        onPress={() => handleSubmit(handleSubmitForm)()}
+      >
         Continue
       </Button>
     </YStack>

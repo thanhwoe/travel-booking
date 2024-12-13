@@ -14,7 +14,7 @@ import { Text } from '../../universal';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const TabBarIconMapping: Record<string, FC<SvgFactoryProps>> = {
-  [SCREENS.HOME_STACK]: SearchIcon,
+  [SCREENS.HOME]: SearchIcon,
   [SCREENS.FAVORITES]: HeartIcon,
   [SCREENS.BOOKINGS]: GridIcon,
   [SCREENS.INBOX]: ChatIcon,
@@ -22,7 +22,7 @@ const TabBarIconMapping: Record<string, FC<SvgFactoryProps>> = {
 };
 
 const LabelMapping: Record<string, string> = {
-  [SCREENS.HOME_STACK]: 'Home',
+  [SCREENS.HOME]: 'Home',
   [SCREENS.FAVORITES]: 'Favorites',
   [SCREENS.BOOKINGS]: 'Bookings',
   [SCREENS.INBOX]: 'Inbox',

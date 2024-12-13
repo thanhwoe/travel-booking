@@ -1,6 +1,6 @@
 'use client';
 
-import { memo } from 'react';
+import { memo, useTransition } from 'react';
 import { Token, YStack, getTokenValue } from 'tamagui';
 import { useForm } from 'react-hook-form';
 import { PhoneInputController } from '../PhoneInputController';
@@ -36,11 +36,19 @@ interface IProps {
 }
 
 export const SignUpForm = memo<IProps>(({ onSubmit }) => {
+  const [isPending, startTransition] = useTransition();
+
   const { control, handleSubmit } = useForm<ISignUpForm>({
     resolver: zodResolver(signUpSchema),
     mode: 'onBlur',
     reValidateMode: 'onBlur',
   });
+
+  const handleSubmitForm = (data: ISignUpForm) => {
+    startTransition(() => {
+      onSubmit(data);
+    });
+  };
 
   return (
     <YStack>
@@ -58,7 +66,12 @@ export const SignUpForm = memo<IProps>(({ onSubmit }) => {
         label="Password"
         secureTextEntry
       />
-      <Button mt="$4" variant="CTA" onPress={() => handleSubmit(onSubmit)()}>
+      <Button
+        mt="$4"
+        variant="CTA"
+        isLoading={isPending}
+        onPress={() => handleSubmit(handleSubmitForm)()}
+      >
         Continue
       </Button>
       <Text mx="auto" my="$3">

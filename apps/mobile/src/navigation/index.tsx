@@ -6,6 +6,7 @@ import { LoginScreen, SignupScreen } from '../screens';
 import { BottomTabNavigator } from './bottom-tab';
 import { SCREENS } from '@shared/constants';
 import { useAuthStore } from '@shared/stores';
+import { HomeNavigator } from './home-stack';
 
 const AppStack = createNativeStackNavigator<AppStackParamList>();
 
@@ -26,10 +27,16 @@ export const AppNavigator = () => {
         }}
       >
         {isAuthenticated ? (
-          <AppStack.Screen
-            name={SCREENS.ROOT_TAB}
-            component={BottomTabNavigator}
-          />
+          <>
+            <AppStack.Screen
+              name={SCREENS.ROOT_TAB}
+              component={BottomTabNavigator}
+            />
+            <AppStack.Screen
+              name={SCREENS.HOME_STACK}
+              component={HomeNavigator}
+            />
+          </>
         ) : (
           <>
             <AppStack.Screen name={SCREENS.SIGN_UP} component={SignupScreen} />

@@ -5,3 +5,4 @@ export * from './Bookings';
 export * from './Favorites';
 export * from './Inbox';
 export * from './Profile';
+export * from './Search';

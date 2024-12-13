@@ -12,4 +12,5 @@ export enum SCREENS {
   BOOKINGS = 'Bookings',
   INBOX = 'Inbox',
   PROFILE = 'Profile',
+  SEARCH = 'Search',
 }

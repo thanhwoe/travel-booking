@@ -12,8 +12,8 @@ export const SearchInput = memo<IProps>(
   ({ placeholder = 'Search', hasFilter, onPress, ...props }) => {
     return (
       <Input
-        leftIcon={<SearchIcon />}
-        {...(hasFilter && { rightIcon: <FilterIcon /> })}
+        leftIcon={<SearchIcon width="$5" height="$5" />}
+        {...(hasFilter && { rightIcon: <FilterIcon />, pr: 50 })}
         placeholder={placeholder}
         editable={!onPress}
         containerStyle={{
@@ -21,6 +21,7 @@ export const SearchInput = memo<IProps>(
           backgroundColor: '$white',
           borderRadius: '$2',
         }}
+        fontSize="$4"
         onPress={onPress}
         {...props}
       />

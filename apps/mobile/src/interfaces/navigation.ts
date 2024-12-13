@@ -1,24 +1,25 @@
 import {
   CompositeScreenProps,
-  NavigationProp,
   NavigatorScreenParams,
 } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { SCREENS } from '@shared/constants';
+import { ISearchFilter } from '@shared/interfaces';
 
 // App Stack
 export type AppStackParamList = {
   [SCREENS.LOGIN]: undefined;
   [SCREENS.SIGN_UP]: undefined;
   [SCREENS.ROOT_TAB]: NavigatorScreenParams<RootTabParamList> | undefined;
+  [SCREENS.HOME_STACK]: NavigatorScreenParams<HomeStackParamList> | undefined;
 };
 export type AppStackScreenProps<Screen extends keyof AppStackParamList> =
   NativeStackScreenProps<AppStackParamList, Screen>;
 
 // Root Tab
 export type RootTabParamList = {
-  [SCREENS.HOME_STACK]: NavigatorScreenParams<HomeStackParamList> | undefined;
+  [SCREENS.HOME]: undefined | { filters: ISearchFilter };
   [SCREENS.FAVORITES]: undefined;
   [SCREENS.BOOKINGS]: undefined;
   [SCREENS.INBOX]: undefined;
@@ -32,7 +33,7 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
 
 // Home Stack
 export type HomeStackParamList = {
-  [SCREENS.HOME]: undefined;
+  [SCREENS.SEARCH]: undefined;
 };
 export type HomeStackScreenProps<Screen extends keyof HomeStackParamList> =
   CompositeScreenProps<
@@ -42,6 +43,3 @@ export type HomeStackScreenProps<Screen extends keyof HomeStackParamList> =
       NativeStackScreenProps<AppStackParamList>
     >
   >;
-
-export type RootStackParamListNavigation = Record<SCREENS, undefined>;
-export type StackNavigation = NavigationProp<RootStackParamListNavigation>;

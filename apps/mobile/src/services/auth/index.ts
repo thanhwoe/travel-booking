@@ -7,7 +7,6 @@ const setUser = useAuthStore.use.setUser();
 const clearUser = useAuthStore.use.clearUser();
 
 export const signInAction = async (formData: ISignInForm) => {
-  console.log({ formData });
   const {
     error,
     data: { user },

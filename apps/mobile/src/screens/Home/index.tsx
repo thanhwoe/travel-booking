@@ -1,10 +1,18 @@
 import { IRoom, RoomType } from '@shared/interfaces';
-import { CardItem, SearchInput, TabHeading } from '@shared/ui/components';
+import {
+  CardItem,
+  FilterPopup,
+  SearchInput,
+  TabHeading,
+} from '@shared/ui/components';
 import { BeachIcon, MountainIcon, CampingIcon } from '@shared/ui/icons';
-import { useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { FlatList } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { View, YStack } from 'tamagui';
+import { RootTabScreenProps } from '../../interfaces';
+import { SCREENS } from '@shared/constants';
+import { displayDate } from '@shared/utils';
 
 const mockData: IRoom[] = [
   {
@@ -96,11 +104,28 @@ const TABS = [
     icon: CampingIcon,
   },
 ];
+type HomeScreenProps = RootTabScreenProps<typeof SCREENS.HOME>;
 
-export const HomeScreen = () => {
+export const HomeScreen: FC<HomeScreenProps> = ({
+  navigation: { navigate },
+  route,
+}) => {
   const insets = useSafeAreaInsets();
 
+  const { params } = route;
+  const { filters } = params || {};
+
   const [tab, setTab] = useState(TABS[0].value);
+  const [isOpenFilters, setIsOpenFilters] = useState(false);
+
+  const searchDisplay = useMemo(() => {
+    if (!filters) return '';
+    const { location, dates, guests } = filters || {};
+    return `${location}, ${displayDate(
+      dates?.startDate,
+      dates?.endDate
+    )}, ${guests} guests`;
+  }, [filters]);
 
   return (
     <YStack backgroundColor="$white" gap="$6" f={1}>
@@ -108,13 +133,12 @@ export const HomeScreen = () => {
         <YStack mt={insets.top} px="$5" gap="$3">
           <SearchInput
             placeholder="Where do you want to stay?"
+            value={searchDisplay}
             onPress={() => {
-              console.log('first');
+              navigate(SCREENS.HOME_STACK, { screen: SCREENS.SEARCH });
             }}
-            hasFilter
-            onPressRightIcon={() => {
-              console.log('second');
-            }}
+            hasFilter={!!filters}
+            onPressRightIcon={setIsOpenFilters.bind(null, true)}
           />
           <TabHeading activeTab={tab} onChangeTab={setTab} tabs={TABS} />
         </YStack>
@@ -129,6 +153,8 @@ export const HomeScreen = () => {
         showsVerticalScrollIndicator={false}
         removeClippedSubviews
       />
+
+      <FilterPopup open={isOpenFilters} onOpenChange={setIsOpenFilters} />
     </YStack>
   );
 };

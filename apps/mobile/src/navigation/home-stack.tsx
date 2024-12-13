@@ -1,7 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { HomeStackParamList } from '../interfaces';
-import { HomeScreen } from '../screens';
+import { SearchScreen } from '../screens';
 import { SCREENS } from '@shared/constants';
+import { CloseHeader } from '../components';
 
 const Stack = createNativeStackNavigator<HomeStackParamList>();
 
@@ -14,9 +15,9 @@ export const HomeNavigator = () => {
       }}
     >
       <Stack.Screen
-        options={{ headerShown: false }}
-        name={SCREENS.HOME}
-        component={HomeScreen}
+        options={{ header: CloseHeader }}
+        name={SCREENS.SEARCH}
+        component={SearchScreen}
       />
     </Stack.Navigator>
   );

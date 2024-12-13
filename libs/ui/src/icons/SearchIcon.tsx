@@ -8,10 +8,11 @@ export const SearchIcon = ({
   width = '$6',
   height = '$6',
   color = '$color',
+  fill = 'white',
   ...rest
 }: SvgFactoryProps) => (
   <SvgFactory
-    viewBox="0 0 24 24"
+    viewBox="0 0 18 18"
     width={width}
     height={height}
     color={color}
@@ -26,7 +27,7 @@ export const SearchIcon = ({
       strokeLinecap="square"
     />
     <Path
-      fill="white"
+      fill={fill}
       d="M7.07 12.25C10.207 12.25 12.75 9.70698 12.75 6.57C12.75 3.43302 10.207 0.889999 7.07 0.889999C3.93302 0.889999 1.39 3.43302 1.39 6.57C1.39 9.70698 3.93302 12.25 7.07 12.25Z"
       stroke="currentColor"
       strokeWidth="1.704"

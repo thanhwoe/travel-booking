@@ -22,3 +22,5 @@ export * from './BeachIcon';
 export * from './CampingIcon';
 export * from './MountainIcon';
 export * from './LogoutIcon';
+export * from './MinusIcon';
+export * from './PlusIcon';
