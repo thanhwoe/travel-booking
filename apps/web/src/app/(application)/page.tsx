@@ -1,6 +1,8 @@
 'use client';
 import { IRoom, RoomType } from '@shared/interfaces';
 import { AccordionFilter, CardItem, Pagination } from '@shared/ui/components';
+import Link from 'next/link';
+import { Suspense } from 'react';
 import { Separator, XStack, YStack } from 'tamagui';
 
 const mockData: IRoom[] = [
@@ -79,15 +81,21 @@ const mockData: IRoom[] = [
 export default function Index() {
   return (
     <XStack jc="center" mt={60} gap={60}>
-      <AccordionFilter />
+      <Suspense>
+        <AccordionFilter />
+      </Suspense>
       <YStack>
         {mockData.map((item, index) => (
           <YStack key={item.id}>
-            <CardItem data={item} />
+            <Link href={`/${item.id}`}>
+              <CardItem data={item} />
+            </Link>
             {mockData.length - 1 !== index && <Separator my="$6" />}
           </YStack>
         ))}
-        <Pagination totalPages={10} mt="$12" mb="$24" />
+        <Suspense>
+          <Pagination totalPages={10} mt="$12" mb="$24" />
+        </Suspense>
       </YStack>
     </XStack>
   );

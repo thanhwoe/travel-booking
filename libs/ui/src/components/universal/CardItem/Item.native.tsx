@@ -4,6 +4,7 @@ import { Button, styled, XStack, YStack } from 'tamagui';
 import { ImageSlider } from '../ImageSlider';
 import { Text } from '../Text';
 import { HeartIcon, StarIcon } from '../../../icons';
+import { Metrics } from '../../../themes';
 
 interface IProps {
   data: IRoom;
@@ -22,7 +23,7 @@ const FavoriteButton = styled(Button, {
   w: 36,
 });
 
-export const CardItem = memo<IProps>(({ data }) => {
+export const CardItem = memo<IProps>(({ data, onPress }) => {
   const {
     amenities,
     caption,
@@ -39,8 +40,13 @@ export const CardItem = memo<IProps>(({ data }) => {
   } = data || {};
 
   return (
-    <YStack mb="$6" mx="$5">
-      <ImageSlider />
+    <YStack mb="$6" mx="$5" onPress={onPress?.bind(null, id)}>
+      <ImageSlider
+        style={{
+          borderRadius: 8,
+        }}
+        width={Metrics.screenWidth - 20 * 2}
+      />
       <XStack jc="space-between" mt="$4">
         <Text fontWeight="bold">{name}</Text>
         <Text>

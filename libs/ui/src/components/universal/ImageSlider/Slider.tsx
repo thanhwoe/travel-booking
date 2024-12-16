@@ -3,7 +3,8 @@
 import { memo } from 'react';
 import Image from 'next/image';
 import Slider from 'react-slick';
-import { Stack } from 'tamagui';
+import { Stack, ViewStyle } from 'tamagui';
+import { StyleProp } from 'react-native';
 
 const settings = {
   dots: false,
@@ -20,21 +21,35 @@ const mockImages = [
   'https://ng.jumia.is/cms/08-august/theplace_desktopslider.jpg',
 ];
 
-export const ImageSlider = memo(() => {
-  return (
-    <Stack w={400} borderRadius="$2" overflow="hidden">
-      <Slider {...settings}>
-        {mockImages.map((image, index) => (
-          <Stack key={index}>
-            <Image
-              src={image}
-              alt={`Image ${index}`}
-              width={400}
-              height={200}
-            />
-          </Stack>
-        ))}
-      </Slider>
-    </Stack>
-  );
-});
+interface IProps {
+  width?: number;
+  height?: number;
+  style?: StyleProp<ViewStyle>;
+}
+
+export const ImageSlider = memo<IProps>(
+  ({ height = 200, style, width = 400 }) => {
+    return (
+      <Stack
+        w={width}
+        borderRadius="$2"
+        style={style as any}
+        overflow="hidden"
+        onPress={(e) => e.stopPropagation()}
+      >
+        <Slider {...settings}>
+          {mockImages.map((image, index) => (
+            <Stack key={index}>
+              <Image
+                src={image}
+                alt={`Image ${index}`}
+                width={width}
+                height={height}
+              />
+            </Stack>
+          ))}
+        </Slider>
+      </Stack>
+    );
+  }
+);

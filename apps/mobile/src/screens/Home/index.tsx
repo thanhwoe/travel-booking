@@ -6,7 +6,7 @@ import {
   TabHeading,
 } from '@shared/ui/components';
 import { BeachIcon, MountainIcon, CampingIcon } from '@shared/ui/icons';
-import { FC, useMemo, useState } from 'react';
+import { FC, useCallback, useMemo, useState } from 'react';
 import { FlatList } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { View, YStack } from 'tamagui';
@@ -127,6 +127,21 @@ export const HomeScreen: FC<HomeScreenProps> = ({
     )}, ${guests} guests`;
   }, [filters]);
 
+  const renderItem = useCallback(({ item }: { item: IRoom }) => {
+    const handleOpen = (id: string) => {
+      navigate(SCREENS.HOME_STACK, {
+        screen: SCREENS.PRODUCT_STACK,
+        params: {
+          screen: SCREENS.PRODUCT_DETAIL,
+          params: {
+            id,
+          },
+        },
+      });
+    };
+    return <CardItem data={item} onPress={handleOpen} />;
+  }, []);
+
   return (
     <YStack backgroundColor="$white" gap="$6" f={1}>
       <View backgroundColor="$primary20">
@@ -147,9 +162,9 @@ export const HomeScreen: FC<HomeScreenProps> = ({
       <FlatList
         data={mockData}
         keyExtractor={({ id }) => id}
-        renderItem={({ item }) => <CardItem data={item} />}
-        maxToRenderPerBatch={20}
-        initialNumToRender={20}
+        renderItem={renderItem}
+        maxToRenderPerBatch={10}
+        initialNumToRender={10}
         showsVerticalScrollIndicator={false}
         removeClippedSubviews
       />

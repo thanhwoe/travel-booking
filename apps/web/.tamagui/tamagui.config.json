@@ -46906,6 +46906,13 @@
           "val": "#DE3B40FF",
           "variable": "var(--c-red10)"
         },
+        "yellow10": {
+          "isVar": true,
+          "key": "$yellow10",
+          "name": "c-yellow10",
+          "val": "#f3c640",
+          "variable": "var(--c-yellow10)"
+        },
         "grey10": {
           "isVar": true,
           "key": "$grey10",
@@ -46947,6 +46954,13 @@
           "name": "c-grey60",
           "val": "#F8F9FAFF",
           "variable": "var(--c-grey60)"
+        },
+        "grey70": {
+          "isVar": true,
+          "key": "$grey70",
+          "name": "c-grey70",
+          "val": "#FAFAFBFF",
+          "variable": "var(--c-grey70)"
         },
         "text": {
           "isVar": true,
@@ -49974,6 +49988,13 @@
         "val": "#DE3B40FF",
         "variable": "var(--c-red10)"
       },
+      "$color.yellow10": {
+        "isVar": true,
+        "key": "$yellow10",
+        "name": "c-yellow10",
+        "val": "#f3c640",
+        "variable": "var(--c-yellow10)"
+      },
       "$color.grey10": {
         "isVar": true,
         "key": "$grey10",
@@ -50015,6 +50036,13 @@
         "name": "c-grey60",
         "val": "#F8F9FAFF",
         "variable": "var(--c-grey60)"
+      },
+      "$color.grey70": {
+        "isVar": true,
+        "key": "$grey70",
+        "name": "c-grey70",
+        "val": "#FAFAFBFF",
+        "variable": "var(--c-grey70)"
       },
       "$color.text": {
         "isVar": true,

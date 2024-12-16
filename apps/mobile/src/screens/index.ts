@@ -6,3 +6,4 @@ export * from './Favorites';
 export * from './Inbox';
 export * from './Profile';
 export * from './Search';
+export * from './ProductDetail';

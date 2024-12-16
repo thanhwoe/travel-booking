@@ -1,8 +1,9 @@
 import { memo, useRef } from 'react';
-import { Stack } from 'tamagui';
+import { Stack, ViewStyle } from 'tamagui';
 import Carousel, { ICarouselInstance } from 'react-native-reanimated-carousel';
 import { Image } from '../Image';
 import { Metrics } from '../../../themes';
+import { StyleProp } from 'react-native';
 
 const mockImages = [
   'https://ng.jumia.is/cms/0-1-weekly-cps/0-2023/w35-Grocery/Gadget-upgrade/Grocery-big-savings/Desktop_Homepage_Slider__712x384.jpg',
@@ -11,28 +12,32 @@ const mockImages = [
   'https://ng.jumia.is/cms/08-august/theplace_desktopslider.jpg',
 ];
 
-const WIDTH = Metrics.screenWidth - 20 * 2;
+const WIDTH = Metrics.screenWidth;
 const HEIGHT = 325;
 
 interface IProps {
   width?: number;
   height?: number;
+  style?: StyleProp<ViewStyle>;
 }
 
 export const ImageSlider = memo<IProps>(
-  ({ width = WIDTH, height = HEIGHT }) => {
+  ({ width = WIDTH, height = HEIGHT, style }) => {
     const ref = useRef<ICarouselInstance>(null);
 
     return (
-      <Stack w={width} h={height} mx="auto">
+      <Stack
+        w={width}
+        h={height}
+        mx="auto"
+        onPress={(e) => e.stopPropagation()}
+      >
         <Carousel
           width={width}
           height={height}
           ref={ref}
           data={mockImages}
-          style={{
-            borderRadius: 8,
-          }}
+          style={style as any}
           renderItem={({ item, index }) => (
             <Stack>
               <Image

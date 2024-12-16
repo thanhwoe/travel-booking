@@ -61,7 +61,13 @@ const FOOTER_ITEM = [
 export const Footer = () => {
   return (
     <YStack px={132} backgroundColor="$grey60" mt="auto">
-      <XStack gap={128} borderBottomWidth="$px" borderColor="$grey50" py="$10">
+      <XStack
+        gap={128}
+        borderBottomWidth="$px"
+        borderColor="$grey50"
+        py="$10"
+        flexWrap="wrap"
+      >
         {FOOTER_ITEM.map(({ title, items }) => (
           <YStack key={title} gap="$3">
             <Text fontWeight="bold" size="extraLarge">

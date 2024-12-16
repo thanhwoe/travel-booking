@@ -24,10 +24,12 @@ const NAVIGATORS = [
 
 interface IProps {
   onSignOut?: () => void;
+  isAuth?: boolean;
 }
 
-export const Header = ({ onSignOut }: IProps) => {
+export const Header = ({ onSignOut, isAuth }: IProps) => {
   const pathname = usePathname();
+
   return (
     <XStack px="$6" py="$0.5" jc="space-between" alignItems="center">
       <XStack gap="$6" alignItems="center">
@@ -40,25 +42,28 @@ export const Header = ({ onSignOut }: IProps) => {
           </Navigator>
         ))}
       </XStack>
-      <XStack alignItems="center" gap="$4">
-        <ChatIcon />
-        <BellIcon />
-        <XStack width={36} height={36} borderRadius="$full" overflow="hidden">
-          <Image
-            src="/assets/images/avatar.jpeg"
-            alt="avatar"
-            priority
-            width={100}
-            height={100}
+
+      {isAuth && (
+        <XStack alignItems="center" gap="$4">
+          <ChatIcon />
+          <BellIcon />
+          <XStack width={36} height={36} borderRadius="$full" overflow="hidden">
+            <Image
+              src="/assets/images/avatar.jpeg"
+              alt="avatar"
+              priority
+              width={100}
+              height={100}
+            />
+          </XStack>
+          <LogoutIcon
+            cursor="pointer"
+            onPress={() => {
+              onSignOut?.();
+            }}
           />
         </XStack>
-        <LogoutIcon
-          cursor="pointer"
-          onPress={() => {
-            onSignOut?.();
-          }}
-        />
-      </XStack>
+      )}
     </XStack>
   );
 };

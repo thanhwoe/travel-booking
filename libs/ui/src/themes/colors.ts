@@ -12,6 +12,7 @@ export const colorPalette = {
   blue10: '#379AE6FF',
 
   red10: '#DE3B40FF',
+  yellow10: '#f3c640',
 
   grey10: '#9095A0FF',
   grey20: '#565E6CFF',
@@ -19,6 +20,7 @@ export const colorPalette = {
   grey40: '#A7ADB7FF',
   grey50: '#DEE1E6FF',
   grey60: '#F8F9FAFF',
+  grey70: '#FAFAFBFF',
 
   text: '#171A1FFF',
 };

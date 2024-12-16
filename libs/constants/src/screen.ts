@@ -4,6 +4,7 @@ export enum SCREENS {
 
   //Stacks
   HOME_STACK = 'HomeStack',
+  PRODUCT_STACK = 'ProductStack',
 
   HOME = 'Home',
   LOGIN = 'Login',
@@ -13,4 +14,8 @@ export enum SCREENS {
   INBOX = 'Inbox',
   PROFILE = 'Profile',
   SEARCH = 'Search',
+  PRODUCT_DETAIL = 'ProductDetail',
+  PRODUCT_FACILITIES = 'ProductFacilities',
+  PRODUCT_REVIEWS = 'ProductReviews',
+  PRODUCT_DESCRIPTION = 'ProductDescription',
 }

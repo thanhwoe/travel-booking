@@ -11,3 +11,4 @@ export * from './PhoneInputController';
 export * from './SignUpForm';
 export * from './SignInForm';
 export * from './QuantityField';
+export * from './InputController';

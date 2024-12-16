@@ -34,12 +34,28 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
 // Home Stack
 export type HomeStackParamList = {
   [SCREENS.SEARCH]: undefined;
+  [SCREENS.PRODUCT_STACK]:
+    | NavigatorScreenParams<ProductStackParamList>
+    | undefined;
 };
 export type HomeStackScreenProps<Screen extends keyof HomeStackParamList> =
   CompositeScreenProps<
     NativeStackScreenProps<HomeStackParamList, Screen>,
-    CompositeScreenProps<
-      BottomTabScreenProps<RootTabParamList>,
-      NativeStackScreenProps<AppStackParamList>
-    >
+    NativeStackScreenProps<AppStackParamList>
   >;
+
+// Product Stack
+export type ProductStackParamList = {
+  [SCREENS.PRODUCT_DETAIL]: {
+    id: string;
+  };
+};
+export type ProductStackScreenProps<
+  Screen extends keyof ProductStackParamList
+> = CompositeScreenProps<
+  NativeStackScreenProps<ProductStackParamList, Screen>,
+  CompositeScreenProps<
+    NativeStackScreenProps<HomeStackParamList>,
+    NativeStackScreenProps<AppStackParamList>
+  >
+>;
