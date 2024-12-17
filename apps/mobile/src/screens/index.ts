@@ -7,3 +7,6 @@ export * from './Inbox';
 export * from './Profile';
 export * from './Search';
 export * from './ProductDetail';
+export * from './Facilities';
+export * from './CheckoutOrder';
+export * from './CheckoutStatus';

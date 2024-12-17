@@ -13,7 +13,7 @@ import { Text } from '../Text';
 
 interface InputControllerProps<T extends FieldValues>
   extends GetProps<typeof Input> {
-  label: string;
+  label?: string;
   name: Path<T>;
   control: Control<T>;
   rules?: RegisterOptions<T>;
@@ -35,9 +35,11 @@ const Component = <T extends FieldValues>({
 
   return (
     <YStack aria-invalid={!!error?.message} {...containerStyle}>
-      <Text mb="$2" size="large">
-        {label}
-      </Text>
+      {label && (
+        <Text mb="$2" size="large">
+          {label}
+        </Text>
+      )}
       <XStack gap="$4">
         <Input
           value={value}

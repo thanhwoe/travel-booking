@@ -33,3 +33,4 @@ export * from './ClockIcon';
 export * from './ShareIcon';
 export * from './HomeIcon';
 export * from './CalendarIcon';
+export * from './EditIcon';

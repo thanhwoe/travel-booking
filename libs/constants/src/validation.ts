@@ -85,3 +85,18 @@ export const invoiceSchema = z.object({
       message: ERROR_MESSAGE.FIELD_INVALID('Guest'),
     }),
 });
+
+export const paymentSchema = z.object({
+  cardNumber: z.string({
+    message: ERROR_MESSAGE.FIELD_REQUIRED('Card number'),
+  }),
+  cardHolder: z.string({
+    message: ERROR_MESSAGE.FIELD_REQUIRED('Card holder'),
+  }),
+  expDate: z.string({
+    message: ERROR_MESSAGE.FIELD_REQUIRED('Expiration date'),
+  }),
+  cvv: z.string({
+    message: ERROR_MESSAGE.FIELD_REQUIRED('CVV'),
+  }),
+});

@@ -1,5 +1,3 @@
-import { REGEX } from '@shared/constants';
-
 export const generateDateRange = (start: string, end: string) => {
   const startDate = new Date(start);
   const endDate = new Date(end);
@@ -78,13 +76,27 @@ export const getNumberOfDays = (startDate: Date, endDate: Date) => {
   if (!startDate || !endDate) {
     return 0;
   }
-  if (
-    REGEX.date.test(startDate.toString()) &&
-    REGEX.date.test(endDate.toString())
-  ) {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
+
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  if (start instanceof Date && end instanceof Date) {
     return Math.round((end.getTime() - start.getTime()) / 86400000);
   }
   return 0;
+};
+
+export const getFormattedTime = (date: Date) => {
+  let hours = date.getHours();
+  const minutes = date.getMinutes();
+
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+
+  const formattedHours = hours.toString().padStart(2, '0');
+  const formattedMinutes = minutes.toString().padStart(2, '0');
+
+  return `${formattedHours}:${formattedMinutes} ${ampm}`;
 };

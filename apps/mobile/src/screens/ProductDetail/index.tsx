@@ -19,13 +19,18 @@ export const ProductDetailScreen: FC<ProductDetailScreenProps> = ({
   route,
 }) => {
   const { id } = route.params;
-
   const insets = useSafeAreaInsets();
+
+  const handleOrder = () => {
+    navigation.navigate(SCREENS.CHECKOUT_ORDER, {
+      id,
+    });
+  };
 
   return (
     <View pt={insets.top} backgroundColor="$white" f={1}>
       <ImageSlider height={234} />
-      <ScrollView px="$5" my="$4">
+      <ScrollView px="$5" mt="$4">
         <BasicInfo />
         <Facilities />
         <Reviews />
@@ -44,7 +49,9 @@ export const ProductDetailScreen: FC<ProductDetailScreenProps> = ({
           From: <Text fontWeight="bold">$20</Text>
           <Text>/night</Text>
         </Text>
-        <Button w={144}>Book now</Button>
+        <Button w={144} onPress={handleOrder}>
+          Book now
+        </Button>
       </XStack>
     </View>
   );

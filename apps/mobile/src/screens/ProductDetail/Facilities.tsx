@@ -1,7 +1,11 @@
+import { useNavigation } from '@react-navigation/native';
 import { Button, Heading, Text } from '@shared/ui/components';
 import { GardenIcon, KitchenIcon, PoolIcon, WifiIcon } from '@shared/ui/icons';
 import { memo } from 'react';
 import { Separator, XStack, YStack } from 'tamagui';
+import { ProductStackParamList } from '../../interfaces';
+import { SCREENS } from '@shared/constants';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const DATA = [
   {
@@ -36,6 +40,13 @@ const FACILITIES = [
 ];
 
 export const Facilities = memo(() => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<ProductStackParamList>>();
+
+  const handleOpen = () => {
+    navigation.navigate(SCREENS.PRODUCT_FACILITIES);
+  };
+
   return (
     <YStack>
       <Heading>Facilities & services</Heading>
@@ -54,7 +65,7 @@ export const Facilities = memo(() => {
           </XStack>
         ))}
       </YStack>
-      <Button variant="outline" mt="$5">
+      <Button variant="outline" mt="$5" onPress={handleOpen}>
         Show all
       </Button>
       <Separator mx={-20} my="$5" />

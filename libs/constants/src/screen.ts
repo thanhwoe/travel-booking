@@ -18,4 +18,6 @@ export enum SCREENS {
   PRODUCT_FACILITIES = 'ProductFacilities',
   PRODUCT_REVIEWS = 'ProductReviews',
   PRODUCT_DESCRIPTION = 'ProductDescription',
+  CHECKOUT_ORDER = 'CheckoutOrder',
+  CHECKOUT_STATUS = 'CheckoutStatus',
 }

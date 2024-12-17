@@ -5,3 +5,5 @@ export * from './Pagination';
 export * from './Invoice';
 export * from './Review';
 export * from './ImageDetail';
+export * from './PaymentForm';
+export * from './Bill';

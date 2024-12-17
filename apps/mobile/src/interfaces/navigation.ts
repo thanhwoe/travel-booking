@@ -49,6 +49,16 @@ export type ProductStackParamList = {
   [SCREENS.PRODUCT_DETAIL]: {
     id: string;
   };
+  [SCREENS.PRODUCT_FACILITIES]: {
+    id: string;
+  };
+  [SCREENS.CHECKOUT_ORDER]: {
+    id: string;
+  };
+  [SCREENS.CHECKOUT_STATUS]: {
+    status: 'success' | 'failed';
+    amount: number;
+  };
 };
 export type ProductStackScreenProps<
   Screen extends keyof ProductStackParamList
