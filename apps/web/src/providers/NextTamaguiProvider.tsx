@@ -9,6 +9,16 @@ import { useServerInsertedHTML } from 'next/navigation';
 import { NextThemeProvider } from '@tamagui/next-theme';
 import { TamaguiProvider } from 'tamagui';
 import { tamaguiConfig } from '@shared/ui/themes';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      staleTime: 60 * 1000,
+    },
+  },
+});
 
 export const NextTamaguiProvider = ({ children }: { children: ReactNode }) => {
   useServerInsertedHTML(() => {
@@ -43,8 +53,10 @@ export const NextTamaguiProvider = ({ children }: { children: ReactNode }) => {
   });
 
   return (
-    <NextThemeProvider skipNextHead>
-      <TamaguiProvider config={tamaguiConfig}>{children}</TamaguiProvider>
-    </NextThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <NextThemeProvider skipNextHead>
+        <TamaguiProvider config={tamaguiConfig}>{children}</TamaguiProvider>
+      </NextThemeProvider>
+    </QueryClientProvider>
   );
 };

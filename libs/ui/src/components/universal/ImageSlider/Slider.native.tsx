@@ -19,12 +19,12 @@ interface IProps {
   width?: number;
   height?: number;
   style?: StyleProp<ViewStyle>;
+  data: string[];
 }
 
 export const ImageSlider = memo<IProps>(
-  ({ width = WIDTH, height = HEIGHT, style }) => {
+  ({ width = WIDTH, height = HEIGHT, style, data }) => {
     const ref = useRef<ICarouselInstance>(null);
-
     return (
       <Stack
         w={width}
@@ -36,7 +36,7 @@ export const ImageSlider = memo<IProps>(
           width={width}
           height={height}
           ref={ref}
-          data={mockImages}
+          data={data}
           style={style as any}
           renderItem={({ item, index }) => (
             <Stack>

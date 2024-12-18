@@ -24,20 +24,7 @@ const FavoriteButton = styled(Button, {
 });
 
 export const CardItem = memo<IProps>(({ data, onPress }) => {
-  const {
-    amenities,
-    caption,
-    description,
-    favorite,
-    id,
-    imageUrl,
-    name,
-    price,
-    reviews,
-    star,
-    type,
-    variants,
-  } = data || {};
+  const { id, imageUrl, name, price, star, type } = data || {};
 
   return (
     <YStack mb="$6" mx="$5" onPress={onPress?.bind(null, id)}>
@@ -45,6 +32,7 @@ export const CardItem = memo<IProps>(({ data, onPress }) => {
         style={{
           borderRadius: 8,
         }}
+        data={imageUrl}
         width={Metrics.screenWidth - 20 * 2}
       />
       <XStack jc="space-between" mt="$4">

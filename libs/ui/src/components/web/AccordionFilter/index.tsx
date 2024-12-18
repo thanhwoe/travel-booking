@@ -1,6 +1,5 @@
 'use client';
 
-import { memo, useEffect, useState } from 'react';
 import { Accordion, Square, XStack } from 'tamagui';
 import { Checkbox, Text } from '../../universal';
 import { ChevronDownIcon } from '../../../icons';
@@ -9,27 +8,29 @@ import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 const FILTERS = [
   {
     label: 'Property type',
+    key: 'type',
     items: [
       {
         label: 'Hotel',
-        value: 'Hotel',
+        value: 'hotel',
       },
       {
         label: 'Guesthouse',
-        value: 'Guesthouse',
+        value: 'guesthouse',
       },
       {
         label: 'House',
-        value: 'House',
+        value: 'house',
       },
       {
         label: 'Apartment',
-        value: 'Apartment',
+        value: 'apartment',
       },
     ],
   },
   {
     label: 'Price',
+    key: 'price',
     items: [
       {
         label: 'Below $50',
@@ -51,28 +52,20 @@ const FILTERS = [
   },
 ];
 
-interface IFilterGroup {
-  key: string;
-  value: string[];
-}
-
-export const AccordionFilter = memo(() => {
-  const [filters, setFilters] = useState<IFilterGroup[]>([]);
+export const AccordionFilter = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
+  const params = new URLSearchParams(searchParams);
 
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams);
-
-    filters.forEach((f) => {
-      params.set(
-        f.key.replace(/ /g, '-').toLowerCase(),
-        f.value.join(',').toLowerCase()
-      );
-    });
+  const handleChange = (checked: boolean, key: string, value: string) => {
+    if (checked) {
+      params.set(key, value);
+    } else {
+      params.delete(key);
+    }
     replace(`${pathname}?${params.toString()}`);
-  }, [filters]);
+  };
 
   return (
     <Accordion
@@ -80,12 +73,11 @@ export const AccordionFilter = memo(() => {
       type="multiple"
       gap="$6"
       $gtLg={{ width: 256 }}
+      defaultValue={Array.from(params.keys())}
     >
       {FILTERS.map((item) => {
-        const itemFilters = filters.find((f) => f.key === item.label);
-
         return (
-          <Accordion.Item value={item.label} key={item.label}>
+          <Accordion.Item value={item.key} key={item.label}>
             <Accordion.Trigger borderWidth={0}>
               {({ open }: { open: boolean }) => (
                 <XStack
@@ -108,39 +100,9 @@ export const AccordionFilter = memo(() => {
                 {item.items.map((i) => (
                   <XStack key={i.label} py="$2" gap="$1">
                     <Checkbox
-                      checked={itemFilters?.value.includes(i.value)}
-                      onCheckedChange={(checked) => {
-                        if (itemFilters) {
-                          const selected = new Set(itemFilters.value);
-
-                          if (checked) {
-                            selected.add(i.value);
-                          } else {
-                            selected.delete(i.value);
-                          }
-
-                          const f = {
-                            key: item.label,
-                            value: [...selected],
-                          };
-
-                          setFilters((prev) =>
-                            prev.map((p) => {
-                              if (p.key === f.key) {
-                                return f;
-                              }
-                              return p;
-                            })
-                          );
-                        } else {
-                          if (checked) {
-                            const f = {
-                              key: item.label,
-                              value: [i.value],
-                            };
-                            setFilters((prev) => [...prev, f]);
-                          }
-                        }
+                      checked={params.get(item.key) === i.value}
+                      onCheckedChange={(checked: boolean) => {
+                        handleChange(checked, item.key, i.value);
                       }}
                     />
                     <Text>{i.label}</Text>
@@ -153,4 +115,4 @@ export const AccordionFilter = memo(() => {
       })}
     </Accordion>
   );
-});
+};

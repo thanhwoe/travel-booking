@@ -1,4 +1,4 @@
-import { IRoom, RoomType } from '@shared/interfaces';
+import { IRoom } from '@shared/interfaces';
 import {
   CardItem,
   FilterPopup,
@@ -7,100 +7,28 @@ import {
 } from '@shared/ui/components';
 import { BeachIcon, MountainIcon, CampingIcon } from '@shared/ui/icons';
 import { FC, useCallback, useMemo, useState } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { View, YStack } from 'tamagui';
 import { RootTabScreenProps } from '../../interfaces';
 import { SCREENS } from '@shared/constants';
 import { displayDate } from '@shared/utils';
-
-const mockData: IRoom[] = [
-  {
-    id: '1',
-    name: 'Superior Family Room',
-    caption: 'Hotel room in Ueno',
-    description: 'Superior Family Room',
-    imageUrl: [],
-    variants: ['6 guest', '4 beds', '1 baths'],
-    amenities: ['Free WiFi', 'Air conditioning', 'Kitchen'],
-    star: 4.85,
-    price: 200,
-    reviews: 20,
-    favorite: false,
-    type: RoomType.APARTMENT,
-  },
-  {
-    id: '2',
-    name: 'Superior Family Room',
-    caption: 'Hotel room in Ueno',
-    description: 'Superior Family Room',
-    imageUrl: [],
-    variants: ['6 guest', '4 beds', '1 baths'],
-    amenities: ['Free WiFi', 'Air conditioning', 'Kitchen'],
-    star: 4.85,
-    price: 200,
-    reviews: 20,
-    favorite: false,
-    type: RoomType.APARTMENT,
-  },
-  {
-    id: '4',
-    name: 'Superior Family Room',
-    caption: 'Hotel room in Ueno',
-    description: 'Superior Family Room',
-    imageUrl: [],
-    variants: ['6 guest', '4 beds', '1 baths'],
-    amenities: ['Free WiFi', 'Air conditioning', 'Kitchen'],
-    star: 4.85,
-    price: 200,
-    reviews: 20,
-    favorite: false,
-    type: RoomType.APARTMENT,
-  },
-  {
-    id: '15',
-    name: 'Superior Family Room',
-    caption: 'Hotel room in Ueno',
-    description: 'Superior Family Room',
-    imageUrl: [],
-    variants: ['6 guest', '4 beds', '1 baths'],
-    amenities: ['Free WiFi', 'Air conditioning', 'Kitchen'],
-    star: 4.85,
-    price: 200,
-    reviews: 20,
-    favorite: false,
-    type: RoomType.APARTMENT,
-  },
-  {
-    id: '6',
-    name: 'Superior Family Room',
-    caption: 'Hotel room in Ueno',
-    description: 'Superior Family Room',
-    imageUrl: [],
-    variants: ['6 guest', '4 beds', '1 baths'],
-    amenities: ['Free WiFi', 'Air conditioning', 'Kitchen'],
-    star: 4.85,
-    price: 200,
-    reviews: 20,
-    favorite: false,
-    type: RoomType.APARTMENT,
-  },
-];
+import { useGetListProduct } from '../../services/apis/product';
 
 const TABS = [
   {
-    value: 'beach',
-    label: 'Beach',
+    value: 'all',
+    label: 'All',
     icon: BeachIcon,
   },
   {
-    value: 'mountain',
-    label: 'Mountain',
+    value: 'hotel',
+    label: 'Hotel',
     icon: MountainIcon,
   },
   {
-    value: 'camping',
-    label: 'Camping',
+    value: 'apartment',
+    label: 'Apartment',
     icon: CampingIcon,
   },
 ];
@@ -117,6 +45,8 @@ export const HomeScreen: FC<HomeScreenProps> = ({
 
   const [tab, setTab] = useState(TABS[0].value);
   const [isOpenFilters, setIsOpenFilters] = useState(false);
+
+  const { data, fetchNextPage, isRefetching, refetch } = useGetListProduct();
 
   const searchDisplay = useMemo(() => {
     if (!filters) return '';
@@ -160,13 +90,17 @@ export const HomeScreen: FC<HomeScreenProps> = ({
       </View>
 
       <FlatList
-        data={mockData}
+        data={data}
         keyExtractor={({ id }) => id}
         renderItem={renderItem}
         maxToRenderPerBatch={10}
         initialNumToRender={10}
         showsVerticalScrollIndicator={false}
         removeClippedSubviews
+        onEndReached={fetchNextPage}
+        refreshControl={
+          <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
+        }
       />
 
       <FilterPopup open={isOpenFilters} onOpenChange={setIsOpenFilters} />

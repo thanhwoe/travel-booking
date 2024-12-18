@@ -2,33 +2,28 @@
 
 import { memo } from 'react';
 import Image from 'next/image';
-import Slider from 'react-slick';
+import Slider, { Settings } from 'react-slick';
 import { Stack, ViewStyle } from 'tamagui';
 import { StyleProp } from 'react-native';
 
-const settings = {
+const settings: Settings = {
   dots: false,
   infinite: true,
   speed: 500,
   slidesToShow: 1,
   slidesToScroll: 1,
+  autoplay: true,
 };
-
-const mockImages = [
-  'https://ng.jumia.is/cms/0-1-weekly-cps/0-2023/w35-Grocery/Gadget-upgrade/Grocery-big-savings/Desktop_Homepage_Slider__712x384.jpg',
-  'https://ng.jumia.is/cms/0-5-brand-festival/2023/BF-Slider.jpg',
-  'https://ng.jumia.is/cms/0-1-weekly-cps/0-2023/w35-Grocery/Slider_.jpg',
-  'https://ng.jumia.is/cms/08-august/theplace_desktopslider.jpg',
-];
 
 interface IProps {
   width?: number;
   height?: number;
   style?: StyleProp<ViewStyle>;
+  data: string[];
 }
 
 export const ImageSlider = memo<IProps>(
-  ({ height = 200, style, width = 400 }) => {
+  ({ height = 200, style, width = 400, data }) => {
     return (
       <Stack
         w={width}
@@ -37,15 +32,13 @@ export const ImageSlider = memo<IProps>(
         overflow="hidden"
         onPress={(e) => e.stopPropagation()}
       >
-        <Slider {...settings}>
-          {mockImages.map((image, index) => (
-            <Stack key={index}>
-              <Image
-                src={image}
-                alt={`Image ${index}`}
-                width={width}
-                height={height}
-              />
+        <Slider
+          {...settings}
+          autoplaySpeed={(Math.floor(Math.random() * 10) + 1) * 1000}
+        >
+          {data.map((image, index) => (
+            <Stack key={index} width={width} h={height}>
+              <Image src={image} alt={`Image ${index}`} fill />
             </Stack>
           ))}
         </Slider>

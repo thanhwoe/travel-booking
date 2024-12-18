@@ -21,6 +21,7 @@
     "@react-navigation/bottom-tabs": "*",
     "@react-native-async-storage/async-storage": "*",
     "react-native-config": "*",
+    "react-native-fast-image": "*",
     "react-native-bootsplash": "*"
   }
 }

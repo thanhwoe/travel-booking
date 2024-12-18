@@ -16,14 +16,12 @@ interface IProps {
 export const CardItem = memo<IProps>(({ data, onPress }) => {
   const {
     amenities,
-    caption,
-    description,
-    favorite,
     id,
     imageUrl,
     name,
     price,
-    reviews,
+    review,
+    location,
     star,
     type,
     variants,
@@ -31,12 +29,12 @@ export const CardItem = memo<IProps>(({ data, onPress }) => {
 
   return (
     <XStack $gtLg={{ width: 840 }}>
-      <ImageSlider />
+      <ImageSlider data={imageUrl} />
 
       <YStack ml="$2.5" flexGrow={1}>
         <XStack jc="space-between">
           <Text size="small" mb="$0.5">
-            {caption}
+            {type} in {location}
           </Text>
           <HeartIcon />
         </XStack>
@@ -65,7 +63,7 @@ export const CardItem = memo<IProps>(({ data, onPress }) => {
               {star}
             </Text>
             <Text size="small" color="$grey10">
-              ({reviews} reviews)
+              ({review} reviews)
             </Text>
           </XStack>
           <Text>

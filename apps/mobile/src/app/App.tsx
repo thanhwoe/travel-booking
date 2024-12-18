@@ -8,6 +8,15 @@ import {
   initialWindowMetrics,
 } from 'react-native-safe-area-context';
 import BootSplash from 'react-native-bootsplash';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 export const App = () => {
   useEffect(() => {
@@ -18,13 +27,15 @@ export const App = () => {
 
   return (
     <TamaguiProvider config={tamaguiConfig}>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-          <Suspense>
-            <AppNavigator />
-          </Suspense>
-        </SafeAreaProvider>
-      </GestureHandlerRootView>
+      <QueryClientProvider client={queryClient}>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+            <Suspense>
+              <AppNavigator />
+            </Suspense>
+          </SafeAreaProvider>
+        </GestureHandlerRootView>
+      </QueryClientProvider>
     </TamaguiProvider>
   );
 };
