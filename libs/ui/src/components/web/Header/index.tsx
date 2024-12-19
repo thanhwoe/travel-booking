@@ -27,7 +27,7 @@ interface IProps {
   isAuth?: boolean;
 }
 
-export const Header = ({ onSignOut, isAuth }: IProps) => {
+const Header = ({ onSignOut, isAuth }: IProps) => {
   const pathname = usePathname();
 
   return (
@@ -67,3 +67,5 @@ export const Header = ({ onSignOut, isAuth }: IProps) => {
     </XStack>
   );
 };
+
+export default Header;

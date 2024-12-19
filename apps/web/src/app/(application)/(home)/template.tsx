@@ -1,7 +1,11 @@
 'use client';
 
-import { AccordionFilter } from '@shared/ui/components/web';
 import { Suspense } from 'react';
+import dynamic from 'next/dynamic';
+
+const AccordionFilter = dynamic(
+  () => import('@shared/ui/components/web/AccordionFilter')
+);
 
 export default function Template({ children }: { children: React.ReactNode }) {
   return (

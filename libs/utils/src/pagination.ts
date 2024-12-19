@@ -28,3 +28,21 @@ export function getPageRange(page: number, limit: number) {
 
   return [from, to];
 }
+
+export const generatePriceRange = (query: string) => {
+  switch (query) {
+    case '<50':
+      return { min: 0, max: 50 };
+    case '50-99':
+      return { min: 50, max: 99 };
+
+    case '100-200':
+      return { min: 100, max: 200 };
+
+    case '>200':
+      return { min: 200 };
+
+    default:
+      return { min: 0, max: 0 };
+  }
+};

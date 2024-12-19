@@ -1,14 +1,20 @@
+import { IRoom } from '@shared/interfaces';
 import { Heading, Text } from '@shared/ui/components';
 import { ChevronRightIcon, MapPinIcon, StarIcon } from '@shared/ui/icons';
 import { memo } from 'react';
 import { Separator, XStack, YStack } from 'tamagui';
 
-export const BasicInfo = memo(() => {
+interface IProps {
+  data: IRoom;
+}
+
+export const BasicInfo = memo<IProps>(({ data }) => {
   return (
     <YStack>
-      <Heading size="large">Balian treehouse</Heading>
+      <Heading size="large">{data?.name}</Heading>
       <Text>
-        <MapPinIcon width="$4" height="$4" color="$primary10" /> Bali, Indonesia
+        <MapPinIcon width="$4" height="$4" color="$primary10" />{' '}
+        {data?.location}
       </Text>
 
       <XStack
@@ -21,10 +27,10 @@ export const BasicInfo = memo(() => {
         borderRadius="$1"
       >
         <Text>
-          <StarIcon mt={-2} /> 4.5/5
+          <StarIcon mt={-2} /> {data?.star}/5
         </Text>
         <Text>
-          (12 reviews)
+          ({data?.review} reviews)
           <ChevronRightIcon width="$5" height="$5" mt={-2} />
         </Text>
       </XStack>

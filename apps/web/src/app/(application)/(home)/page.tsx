@@ -5,7 +5,7 @@ import {
   QueryClient,
 } from '@tanstack/react-query';
 
-import { HomePage } from '@shared/features/Home';
+import HomePage from '@shared/features/Home';
 import { PRODUCT_KEY } from '@shared/constants';
 
 export default async function Index({

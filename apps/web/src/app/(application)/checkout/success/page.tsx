@@ -1,8 +1,7 @@
 'use client';
 
-import { Heading, Text } from '@shared/ui/components';
+import { Heading, Image, Text } from '@shared/ui/components';
 import { CalendarIcon, ClockIcon, MapPinIcon } from '@shared/ui/icons';
-import Image from 'next/image';
 import { Separator, XStack, YStack } from 'tamagui';
 
 export default function Index() {

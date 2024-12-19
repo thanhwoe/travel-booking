@@ -35,7 +35,7 @@ const TABS = [
 type HomeScreenProps = RootTabScreenProps<typeof SCREENS.HOME>;
 
 export const HomeScreen: FC<HomeScreenProps> = ({
-  navigation: { navigate },
+  navigation: { navigate, setParams },
   route,
 }) => {
   const insets = useSafeAreaInsets();
@@ -46,7 +46,10 @@ export const HomeScreen: FC<HomeScreenProps> = ({
   const [tab, setTab] = useState(TABS[0].value);
   const [isOpenFilters, setIsOpenFilters] = useState(false);
 
-  const { data, fetchNextPage, isRefetching, refetch } = useGetListProduct();
+  const { data, fetchNextPage, isRefetching, refetch } = useGetListProduct({
+    type: tab,
+    price: filters?.price,
+  });
 
   const searchDisplay = useMemo(() => {
     if (!filters) return '';
@@ -71,6 +74,19 @@ export const HomeScreen: FC<HomeScreenProps> = ({
     };
     return <CardItem data={item} onPress={handleOpen} />;
   }, []);
+
+  const handleApplyFilter = (f: {
+    place: number[];
+    facility: number[];
+    price: number[];
+  }) => {
+    setParams({
+      filters: {
+        ...filters,
+        price: f.price,
+      },
+    });
+  };
 
   return (
     <YStack backgroundColor="$white" gap="$6" f={1}>
@@ -103,7 +119,11 @@ export const HomeScreen: FC<HomeScreenProps> = ({
         }
       />
 
-      <FilterPopup open={isOpenFilters} onOpenChange={setIsOpenFilters} />
+      <FilterPopup
+        open={isOpenFilters}
+        onOpenChange={setIsOpenFilters}
+        onApply={handleApplyFilter}
+      />
     </YStack>
   );
 };

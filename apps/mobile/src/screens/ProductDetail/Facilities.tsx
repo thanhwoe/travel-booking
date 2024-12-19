@@ -6,19 +6,7 @@ import { Separator, XStack, YStack } from 'tamagui';
 import { ProductStackParamList } from '../../interfaces';
 import { SCREENS } from '@shared/constants';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-
-const DATA = [
-  {
-    label: 'Guests',
-    value: 2,
-  },
-  {
-    label: 'Bedrooms',
-    value: 2,
-  },
-  { label: 'Beds', value: 2 },
-  { label: 'Bathrooms', value: 2 },
-];
+import { IRoom } from '@shared/interfaces';
 
 const FACILITIES = [
   {
@@ -39,7 +27,11 @@ const FACILITIES = [
   },
 ];
 
-export const Facilities = memo(() => {
+interface IProps {
+  data: IRoom;
+}
+
+export const Facilities = memo<IProps>(({ data }) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<ProductStackParamList>>();
 
@@ -51,9 +43,9 @@ export const Facilities = memo(() => {
     <YStack>
       <Heading>Facilities & services</Heading>
       <XStack>
-        {DATA.map((item) => (
-          <Text key={item.label} px="$2" py="$1.5">
-            {item.value} {item.label}
+        {data?.variants.map((item) => (
+          <Text key={item} px="$2" py="$1.5">
+            {item}
           </Text>
         ))}
       </XStack>

@@ -1,10 +1,10 @@
 'use Client';
 
 import { memo } from 'react';
-import Image from 'next/image';
 import Slider, { Settings } from 'react-slick';
 import { Stack, ViewStyle } from 'tamagui';
 import { StyleProp } from 'react-native';
+import { Image } from '../Image';
 
 const settings: Settings = {
   dots: false,
@@ -38,7 +38,12 @@ export const ImageSlider = memo<IProps>(
         >
           {data.map((image, index) => (
             <Stack key={index} width={width} h={height}>
-              <Image src={image} alt={`Image ${index}`} fill />
+              <Image
+                src={image}
+                alt={`Image ${index}`}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                fill
+              />
             </Stack>
           ))}
         </Slider>

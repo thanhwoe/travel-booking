@@ -20,7 +20,7 @@ interface IProps {
   query: Record<string, string>;
 }
 
-export const HomePage = memo<IProps>(
+const HomePage = memo<IProps>(
   ({ getListProductAction, currentPage, query }) => {
     const { data: response } = useQuery({
       queryKey: PRODUCT_KEY.all(currentPage, query),
@@ -60,3 +60,5 @@ export const HomePage = memo<IProps>(
     );
   }
 );
+
+export default HomePage;

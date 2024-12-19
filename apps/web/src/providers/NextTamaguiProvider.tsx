@@ -48,6 +48,11 @@ export const NextTamaguiProvider = ({ children }: { children: ReactNode }) => {
             }),
           }}
         />
+        <style jsx global>{`
+          html {
+            font-family: 'Montserrat', sans-serif;
+          }
+        `}</style>
       </>
     );
   });

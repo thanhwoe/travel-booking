@@ -11,12 +11,26 @@ import { Button } from '../Button';
 interface IProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  onApply: (data: {
+    place: number[];
+    facility: number[];
+    price: number[];
+  }) => void;
 }
 
-export const FilterPopup = memo<IProps>(({ open, onOpenChange }) => {
+export const FilterPopup = memo<IProps>(({ open, onOpenChange, onApply }) => {
   const [placeFilters, setPlaceFilters] = useState<number[]>([]);
   const [facilityFilters, setFacilityFilters] = useState<number[]>([]);
   const [priceFilters, setPriceFilters] = useState<number[]>([50, 100]);
+
+  const handleApply = () => {
+    onOpenChange(false);
+    onApply({
+      place: placeFilters,
+      facility: facilityFilters,
+      price: priceFilters,
+    });
+  };
 
   return (
     <Sheet
@@ -91,7 +105,9 @@ export const FilterPopup = memo<IProps>(({ open, onOpenChange }) => {
           borderColor="$grey50"
         >
           <Text color="$grey10">Clear all</Text>
-          <Button maxWidth={144}>View Results</Button>
+          <Button maxWidth={144} onPress={handleApply}>
+            View Results
+          </Button>
         </XStack>
       </Sheet.Frame>
     </Sheet>

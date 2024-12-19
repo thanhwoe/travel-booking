@@ -12,11 +12,11 @@ export const Policies = memo(() => {
           House rules
         </Text>
         <Text size="small">
-          <ClockIcon width="$4" height="$4" mt={-3} />
+          <ClockIcon width="$4" height="$4" mt={-3} mr="$1" />
           Earliest check-in time: 14:00
         </Text>
         <Text size="small" mt="$2">
-          <ClockIcon width="$4" height="$4" mt={-3} />
+          <ClockIcon width="$4" height="$4" mt={-3} mr="$1" />
           Lastest check-out time: 12:00
         </Text>
       </YStack>

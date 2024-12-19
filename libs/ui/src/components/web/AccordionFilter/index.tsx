@@ -52,7 +52,7 @@ const FILTERS = [
   },
 ];
 
-export const AccordionFilter = () => {
+const AccordionFilter = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -116,3 +116,5 @@ export const AccordionFilter = () => {
     </Accordion>
   );
 };
+
+export default AccordionFilter;

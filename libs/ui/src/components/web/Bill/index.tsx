@@ -28,7 +28,6 @@ export const Bill = memo(() => {
           <Image
             alt="product"
             fill
-            objectFit="cover"
             src={
               'https://ng.jumia.is/cms/0-5-brand-festival/2023/BF-Slider.jpg'
             }

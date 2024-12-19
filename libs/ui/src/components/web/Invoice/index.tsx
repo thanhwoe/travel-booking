@@ -4,16 +4,21 @@ import { Separator, XStack, YStack } from 'tamagui';
 import { Button, InputController, Text } from '../../universal';
 import { StarIcon } from '../../../icons';
 import { useForm } from 'react-hook-form';
-import { IInvoiceForm } from '@shared/interfaces';
+import { IInvoiceForm, IRoom } from '@shared/interfaces';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { invoiceSchema } from '@shared/constants';
 import { memo, useMemo } from 'react';
 import { getNumberOfDays } from '@shared/utils';
 
-const PRICE = 96;
 const FEES = 12;
 
-export const Invoice = memo(() => {
+interface IProps {
+  data?: IRoom;
+}
+
+export const Invoice = memo<IProps>(({ data }) => {
+  const { price = 0 } = data || {};
+
   const { control, handleSubmit, watch } = useForm<IInvoiceForm>({
     resolver: zodResolver(invoiceSchema),
     mode: 'onBlur',
@@ -31,7 +36,7 @@ export const Invoice = memo(() => {
   );
 
   const totalPrice = useMemo(() => {
-    const raw = numberOfDays * PRICE;
+    const raw = numberOfDays * price;
 
     return {
       raw,
@@ -51,7 +56,7 @@ export const Invoice = memo(() => {
       <XStack jc="space-between">
         <Text size="extraLarge">
           <Text size="extraLarge" fontWeight="bold">
-            ${PRICE}
+            ${price}
           </Text>
           /night
         </Text>
@@ -84,7 +89,7 @@ export const Invoice = memo(() => {
       <YStack mt="$10" gap="$2" mb="$4">
         <XStack jc="space-between">
           <Text>
-            ${PRICE} x {numberOfDays} nights
+            ${price} x {numberOfDays} nights
           </Text>
 
           <Text>${totalPrice.raw}</Text>

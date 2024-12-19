@@ -58,7 +58,7 @@ const FOOTER_ITEM = [
   },
 ];
 
-export const Footer = () => {
+const Footer = () => {
   return (
     <YStack px={132} backgroundColor="$grey60" mt="auto">
       <XStack
@@ -117,3 +117,5 @@ export const Footer = () => {
     </YStack>
   );
 };
+
+export default Footer;
