@@ -38,53 +38,64 @@ export const signInSchema = z.object({
     .min(8, ERROR_MESSAGE.FIELD_INVALID('Password')),
 });
 
-export const invoiceSchema = z.object({
-  startDate: z
-    .string({
-      message: ERROR_MESSAGE.FIELD_REQUIRED('Check in date'),
-    })
-    .regex(REGEX.date, {
-      message: 'Date must be in MM/DD/YYYY format',
-    })
-    .transform((str) => {
-      const [month, day, year] = str.split('/').map(Number);
-      return new Date(year, month - 1, day);
-    })
-    .refine((date) => !isNaN(date?.getTime?.()), {
-      message: ERROR_MESSAGE.FIELD_INVALID('Check in date'),
-    })
-    .refine((date) => date >= new Date(new Date().setHours(0, 0, 0, 0)), {
-      message: ERROR_MESSAGE.FIELD_INVALID('Check in date'),
-    }),
-  endDate: z
-    .string({
-      message: ERROR_MESSAGE.FIELD_REQUIRED('Check out date'),
-    })
-    .regex(REGEX.date, {
-      message: 'Date must be in MM/DD/YYYY format',
-    })
-    .transform((str) => {
-      const [month, day, year] = str.split('/').map(Number);
-      return new Date(year, month - 1, day);
-    })
-    .refine((date) => !isNaN(date?.getTime?.()), {
-      message: ERROR_MESSAGE.FIELD_INVALID('Check out date'),
-    })
-    .refine((date) => date >= new Date(new Date().setHours(0, 0, 0, 0)), {
-      message: ERROR_MESSAGE.FIELD_INVALID('Check out date'),
-    }),
-  guest: z
-    .string({
-      message: ERROR_MESSAGE.FIELD_REQUIRED('Guest'),
-    })
-    .refine((value) => !isNaN(Number(value)), {
-      message: ERROR_MESSAGE.FIELD_INVALID('Guest'),
-    })
-    .transform((value) => Number(value))
-    .refine((num) => num >= 1, {
-      message: ERROR_MESSAGE.FIELD_INVALID('Guest'),
-    }),
-});
+export const invoiceSchema = z
+  .object({
+    startDate: z
+      .string({
+        message: ERROR_MESSAGE.FIELD_REQUIRED('Check in date'),
+      })
+      .regex(REGEX.date, {
+        message: 'Date must be in MM/DD/YYYY format',
+      })
+      .transform((str) => {
+        const [month, day, year] = str.split('/').map(Number);
+        return new Date(year, month - 1, day);
+      })
+      .refine((date) => !isNaN(date?.getTime?.()), {
+        message: ERROR_MESSAGE.FIELD_INVALID('Check in date'),
+      })
+      .refine((date) => date >= new Date(new Date().setHours(0, 0, 0, 0)), {
+        message: ERROR_MESSAGE.FIELD_INVALID('Check in date'),
+      }),
+    endDate: z
+      .string({
+        message: ERROR_MESSAGE.FIELD_REQUIRED('Check out date'),
+      })
+      .regex(REGEX.date, {
+        message: 'Date must be in MM/DD/YYYY format',
+      })
+      .transform((str) => {
+        const [month, day, year] = str.split('/').map(Number);
+        return new Date(year, month - 1, day);
+      })
+      .refine((date) => !isNaN(date?.getTime?.()), {
+        message: ERROR_MESSAGE.FIELD_INVALID('Check out date'),
+      })
+      .refine((date) => date >= new Date(new Date().setHours(0, 0, 0, 0)), {
+        message: ERROR_MESSAGE.FIELD_INVALID('Check out date'),
+      }),
+    guest: z
+      .string({
+        message: ERROR_MESSAGE.FIELD_REQUIRED('Guest'),
+      })
+      .refine((value) => !isNaN(Number(value)), {
+        message: ERROR_MESSAGE.FIELD_INVALID('Guest'),
+      })
+      .transform((value) => Number(value))
+      .refine((num) => num >= 1, {
+        message: ERROR_MESSAGE.FIELD_INVALID('Guest'),
+      }),
+  })
+  .refine((data) => {
+    return (
+      data.startDate.toISOString().slice(0, 10) !==
+        data.endDate.toISOString().slice(0, 10),
+      {
+        message: ERROR_MESSAGE.FIELD_INVALID('Check out date'),
+        path: ['endDate'],
+      }
+    );
+  });
 
 export const paymentSchema = z.object({
   cardNumber: z.string({

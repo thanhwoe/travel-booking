@@ -10,9 +10,10 @@ import { InputController } from '../InputController';
 import { PhoneInputController } from '../PhoneInputController';
 import { signInSchema } from '@shared/constants';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Toast } from '../Toast';
 
 interface IProps {
-  onSubmit: (data: ISignInForm) => void;
+  onSubmit: (data: ISignInForm) => Promise<{ errors?: Partial<Error> }>;
 }
 
 export const SignInForm = memo<IProps>(({ onSubmit }) => {
@@ -25,8 +26,14 @@ export const SignInForm = memo<IProps>(({ onSubmit }) => {
   });
 
   const handleSubmitForm = (data: ISignInForm) => {
-    startTransition(() => {
-      onSubmit(data);
+    startTransition(async () => {
+      const { errors } = await onSubmit(data);
+      if (errors) {
+        return Toast.error({
+          title: 'Sign in failed',
+          message: errors.message,
+        });
+      }
     });
   };
 

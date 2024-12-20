@@ -48,7 +48,7 @@ export async function updateSession(request: NextRequest) {
   }
 
   // Already authenticated
-  if (user && isPublicRoute && !path.startsWith('/')) {
+  if (user && isPublicRoute) {
     const url = request.nextUrl.clone();
     url.pathname = '/';
     return NextResponse.redirect(url);

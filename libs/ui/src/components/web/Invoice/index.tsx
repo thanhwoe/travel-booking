@@ -1,7 +1,7 @@
 'use client';
 
 import { Separator, XStack, YStack } from 'tamagui';
-import { Button, InputController, Text } from '../../universal';
+import { Button, InputController, Text, Toast } from '../../universal';
 import { StarIcon } from '../../../icons';
 import { useForm } from 'react-hook-form';
 import { IInvoiceForm, IRoom } from '@shared/interfaces';
@@ -9,6 +9,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { invoiceSchema } from '@shared/constants';
 import { memo, useMemo } from 'react';
 import { getNumberOfDays } from '@shared/utils';
+import { useAuthStore, useCheckoutStore } from '@shared/stores';
+import { useRouter } from 'next/navigation';
 
 const FEES = 12;
 
@@ -18,15 +20,15 @@ interface IProps {
 
 export const Invoice = memo<IProps>(({ data }) => {
   const { price = 0 } = data || {};
+  const user = useAuthStore.use.user();
+  const setOrder = useCheckoutStore.use.setOrder();
+  const router = useRouter();
 
   const { control, handleSubmit, watch } = useForm<IInvoiceForm>({
     resolver: zodResolver(invoiceSchema),
     mode: 'onBlur',
     reValidateMode: 'onBlur',
   });
-  const handleSubmitForm = (data: IInvoiceForm) => {
-    console.log({ data });
-  };
 
   const [startDate, endDate] = watch(['startDate', 'endDate']);
 
@@ -43,6 +45,25 @@ export const Invoice = memo<IProps>(({ data }) => {
       total: raw - FEES > 0 ? raw - FEES : 0,
     };
   }, [numberOfDays]);
+
+  const handleSubmitForm = (payload: IInvoiceForm) => {
+    if (!user) {
+      return Toast.error({
+        title: 'Sign in first',
+        message: 'Please sign in first',
+      });
+    }
+    if (data) {
+      setOrder({
+        room: data,
+        checkIn: payload.startDate,
+        checkOut: payload.endDate,
+        guests: payload.guest,
+        totalPrice: totalPrice.total,
+      });
+      router.push('/checkout');
+    }
+  };
 
   return (
     <YStack

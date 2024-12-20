@@ -15,7 +15,6 @@ export const CheckoutStatusScreen: FC<CheckoutStatusScreenProps> = ({
 }) => {
   const { status, amount } = params;
   const insets = useSafeAreaInsets();
-
   const currentDate = new Date();
 
   const handlePressDone = () => {

@@ -3,7 +3,7 @@ import { getListProductAction, getProductDetailAction } from '../product';
 import { PRODUCT_KEY } from '@shared/constants';
 import { IListProductQuery } from '../../interfaces';
 
-export const useGetListProduct = (query: IListProductQuery) => {
+export const useGetListProduct = (query?: IListProductQuery) => {
   const { isFetchingNextPage, data, hasNextPage, fetchNextPage, ...rest } =
     useInfiniteQuery({
       queryKey: PRODUCT_KEY.all(1, query),

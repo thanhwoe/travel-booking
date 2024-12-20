@@ -2,7 +2,6 @@ import { ISignInForm, ISignUpForm } from '@shared/interfaces';
 import { supabase } from '../supabase';
 import { useAuthStore } from '@shared/stores';
 
-// TODO: add error handling (toast)
 const setUser = useAuthStore.use.setUser();
 const clearUser = useAuthStore.use.clearUser();
 
@@ -15,6 +14,14 @@ export const signInAction = async (formData: ISignInForm) => {
     phone: formData.phoneNumber,
   });
 
+  if (error) {
+    return {
+      errors: {
+        message: error.message,
+      },
+    };
+  }
+
   setUser(user);
 };
 
@@ -26,7 +33,13 @@ export const signUpAction = async (formData: ISignUpForm) => {
     password: formData.password,
     phone: formData.phoneNumber,
   });
-
+  if (error) {
+    return {
+      errors: {
+        message: error.message,
+      },
+    };
+  }
   setUser(user);
 };
 

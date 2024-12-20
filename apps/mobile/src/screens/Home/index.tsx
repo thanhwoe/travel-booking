@@ -14,7 +14,6 @@ import { RootTabScreenProps } from '../../interfaces';
 import { SCREENS } from '@shared/constants';
 import { displayDate } from '@shared/utils';
 import { useGetListProduct } from '../../services/apis/product';
-
 const TABS = [
   {
     value: 'all',

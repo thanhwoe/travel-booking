@@ -1,15 +1,23 @@
 'use client';
 
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { Separator, XStack, YStack } from 'tamagui';
 import { Heading, Image, Text } from '../../universal';
 import { StarIcon } from '../../../icons';
+import { useCheckoutStore } from '@shared/stores';
+import { getNumberOfDays } from '@shared/utils';
 
-const PRICE = 96;
 const FEES = 12;
-const numberOfDays = 2;
 
 export const Bill = memo(() => {
+  const order = useCheckoutStore.use.order();
+  const { checkIn, checkOut, room, totalPrice } = order || {};
+
+  const numberOfDays = useMemo(
+    () => getNumberOfDays(checkIn, checkOut),
+    [checkIn, checkOut]
+  );
+
   return (
     <YStack
       f={1}
@@ -25,23 +33,19 @@ export const Bill = memo(() => {
     >
       <XStack gap="$3">
         <XStack width={212} height={158} borderRadius="$2" overflow="hidden">
-          <Image
-            alt="product"
-            fill
-            src={
-              'https://ng.jumia.is/cms/0-5-brand-festival/2023/BF-Slider.jpg'
-            }
-          />
+          <Image alt="product" fill src={room?.imageUrl[0] || ''} />
         </XStack>
         <YStack>
-          <Text size="small">Hotel room in Ueno</Text>
-          <Heading>Superior Family Room</Heading>
+          <Text size="small">
+            {room?.type} in {room?.location}
+          </Text>
+          <Heading>{room?.name}</Heading>
           <Separator w={70} my="$3" />
           <Text size="small">6 guests • 4 beds • 1 private bath</Text>
           <XStack mt="auto">
             <StarIcon mt={2} />
-            <Text fontWeight="bold">4.84</Text>
-            <Text color="$grey10">(324 reviews)</Text>
+            <Text fontWeight="bold">{room?.star}</Text>
+            <Text color="$grey10">({room?.review} reviews)</Text>
           </XStack>
         </YStack>
       </XStack>
@@ -52,10 +56,10 @@ export const Bill = memo(() => {
       <YStack gap="$2" mb="$4">
         <XStack jc="space-between">
           <Text>
-            ${PRICE} x {numberOfDays} nights
+            ${room?.price} x {numberOfDays} nights
           </Text>
 
-          <Text>$20</Text>
+          <Text>${room?.price || 0 * numberOfDays}</Text>
         </XStack>
         <XStack jc="space-between">
           <Text>Service fee</Text>
@@ -65,7 +69,7 @@ export const Bill = memo(() => {
         <Separator />
         <XStack jc="space-between">
           <Text fontWeight="bold">Total (USD)</Text>
-          <Text fontWeight="bold">$20</Text>
+          <Text fontWeight="bold">${totalPrice}</Text>
         </XStack>
       </YStack>
     </YStack>

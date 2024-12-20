@@ -5,8 +5,6 @@ import { ISignInForm, ISignUpForm } from '@shared/interfaces';
 import { createClient } from '../../services/supabase/server';
 import { redirect } from 'next/navigation';
 
-// TODO: add error handling for wrong credentials (try/catch)
-
 export const signUpAction = async (formData: ISignUpForm) => {
   const supabase = await createClient();
   const validatedFields = signUpSchema.safeParse(formData);
@@ -27,7 +25,6 @@ export const signUpAction = async (formData: ISignUpForm) => {
     return {
       errors: {
         message: error.message,
-        code: error.code,
       },
     };
   }
@@ -57,11 +54,9 @@ export const signInAction = async (formData: ISignInForm) => {
     return {
       errors: {
         message: error.message,
-        code: error.code,
       },
     };
   }
-
   redirect('/');
 };
 
@@ -73,7 +68,6 @@ export const signOutAction = async () => {
     return {
       errors: {
         message: error.message,
-        code: error.code,
       },
     };
   }

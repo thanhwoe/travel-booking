@@ -10,6 +10,7 @@ import { NextThemeProvider } from '@tamagui/next-theme';
 import { TamaguiProvider } from 'tamagui';
 import { tamaguiConfig } from '@shared/ui/themes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ToastProvider } from '@tamagui/toast';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -60,7 +61,9 @@ export const NextTamaguiProvider = ({ children }: { children: ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <NextThemeProvider skipNextHead>
-        <TamaguiProvider config={tamaguiConfig}>{children}</TamaguiProvider>
+        <TamaguiProvider config={tamaguiConfig}>
+          <ToastProvider>{children}</ToastProvider>
+        </TamaguiProvider>
       </NextThemeProvider>
     </QueryClientProvider>
   );

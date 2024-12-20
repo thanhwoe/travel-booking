@@ -1,7 +1,6 @@
 import { useHeaderHeight } from '@react-navigation/elements';
-import { StarIcon } from '@shared/ui/icons';
 import { ScrollView, Separator, View, XStack, YStack } from 'tamagui';
-import { Button, Heading, Image, Text } from '@shared/ui/components';
+import { Button, Heading, Text, Toast } from '@shared/ui/components';
 import { Preview } from './Preview';
 import { TripOption } from './TripOption';
 import { PaymentOption } from './PaymentOption';
@@ -10,8 +9,9 @@ import { getNumberOfDays } from '@shared/utils';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ProductStackScreenProps } from '../../interfaces';
 import { SCREENS } from '@shared/constants';
+import { useGetProductDetail } from '../../services/apis/product';
+import { useCheckoutStore } from '@shared/stores';
 
-const PRICE = 90;
 const FEE = 12;
 
 type CheckoutOrderScreenProps = ProductStackScreenProps<
@@ -19,13 +19,17 @@ type CheckoutOrderScreenProps = ProductStackScreenProps<
 >;
 export const CheckoutOrderScreen: FC<CheckoutOrderScreenProps> = ({
   navigation: { navigate },
+  route,
 }) => {
+  const { id } = route.params;
   const [dates, setDates] = useState({
     startDate: null,
     endDate: null,
   });
   const headerHeight = useHeaderHeight();
   const insets = useSafeAreaInsets();
+  const setOrder = useCheckoutStore.use.setOrder();
+  const { data } = useGetProductDetail(id);
 
   const numberOfDays = useMemo(
     () => getNumberOfDays(dates.startDate, dates.endDate),
@@ -33,25 +37,38 @@ export const CheckoutOrderScreen: FC<CheckoutOrderScreenProps> = ({
   );
 
   const totalPrice = useMemo(() => {
-    const raw = numberOfDays * PRICE;
+    const raw = numberOfDays * data?.price;
 
     return {
       raw,
       total: raw - FEE > 0 ? raw - FEE : 0,
     };
-  }, [numberOfDays]);
+  }, [data?.price, numberOfDays]);
 
   const handleBookOrder = () => {
-    navigate(SCREENS.CHECKOUT_STATUS, {
-      status: 'success',
-      amount: totalPrice.total,
-    });
+    if (dates.startDate && dates.endDate) {
+      setOrder({
+        checkIn: new Date(dates.startDate || ''),
+        checkOut: new Date(dates.endDate || ''),
+        guests: 1,
+        room: data,
+        totalPrice: totalPrice.total,
+      });
+      Toast.success({
+        title: 'Success',
+        message: 'Payment successful',
+      });
+      navigate(SCREENS.CHECKOUT_STATUS, {
+        status: 'success',
+        amount: totalPrice.total,
+      });
+    }
   };
 
   return (
     <View pt={headerHeight + 26} backgroundColor="$white" f={1}>
       <ScrollView showsVerticalScrollIndicator={false} px="$5">
-        <Preview />
+        <Preview data={data} />
         <TripOption onChangeDate={setDates} />
         <PaymentOption />
 
@@ -59,7 +76,7 @@ export const CheckoutOrderScreen: FC<CheckoutOrderScreenProps> = ({
           <Heading size="large">Price details</Heading>
           <XStack jc="space-between">
             <Text>
-              ${PRICE} * {numberOfDays} nights
+              ${data?.price} * {numberOfDays} nights
             </Text>
             <Text fontWeight="bold">${totalPrice.raw}</Text>
           </XStack>

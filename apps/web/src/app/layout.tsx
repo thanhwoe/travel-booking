@@ -2,6 +2,7 @@ import { NextTamaguiProvider } from '../providers/NextTamaguiProvider';
 import './global.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { Toast } from '@shared/ui/components/universal/Toast';
 
 export const metadata = {
   title: 'Welcome to web',
@@ -16,7 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <NextTamaguiProvider>{children}</NextTamaguiProvider>
+        <NextTamaguiProvider>
+          {children}
+          <Toast />
+        </NextTamaguiProvider>
       </body>
     </html>
   );

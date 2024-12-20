@@ -12,6 +12,7 @@ import { InputController } from '../InputController';
 import { signUpSchema } from '@shared/constants';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ISignUpForm } from '@shared/interfaces';
+import { Toast } from '../Toast';
 
 const SOCIAL_AUTH = [
   {
@@ -32,7 +33,7 @@ const SOCIAL_AUTH = [
 ];
 
 interface IProps {
-  onSubmit: (data: ISignUpForm) => void;
+  onSubmit: (data: ISignUpForm) => Promise<{ errors?: Partial<Error> }>;
 }
 
 export const SignUpForm = memo<IProps>(({ onSubmit }) => {
@@ -45,8 +46,14 @@ export const SignUpForm = memo<IProps>(({ onSubmit }) => {
   });
 
   const handleSubmitForm = (data: ISignUpForm) => {
-    startTransition(() => {
-      onSubmit(data);
+    startTransition(async () => {
+      const { errors } = await onSubmit(data);
+      if (errors) {
+        return Toast.error({
+          title: 'Sign up failed',
+          message: errors.message,
+        });
+      }
     });
   };
 

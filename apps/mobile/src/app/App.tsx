@@ -9,6 +9,8 @@ import {
 } from 'react-native-safe-area-context';
 import BootSplash from 'react-native-bootsplash';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ToastProvider } from '@tamagui/toast';
+import { Toast } from '@shared/ui/components';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,13 +30,16 @@ export const App = () => {
   return (
     <TamaguiProvider config={tamaguiConfig}>
       <QueryClientProvider client={queryClient}>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-            <Suspense>
-              <AppNavigator />
-            </Suspense>
-          </SafeAreaProvider>
-        </GestureHandlerRootView>
+        <ToastProvider>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+              <Suspense>
+                <AppNavigator />
+                <Toast />
+              </Suspense>
+            </SafeAreaProvider>
+          </GestureHandlerRootView>
+        </ToastProvider>
       </QueryClientProvider>
     </TamaguiProvider>
   );

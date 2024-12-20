@@ -94,7 +94,7 @@ export const ProductDetailPage = memo<IProps>(
         <ImageDetail data={imageUrl} />
 
         <XStack gap="$16">
-          <YStack flexBasis="66.66%">
+          <YStack flexBasis="65%">
             <Heading size="large">Overview</Heading>
             <XStack mt="$5" mb="$4" ai="center">
               <HomeIcon color="$primary10" />
@@ -133,7 +133,7 @@ export const ProductDetailPage = memo<IProps>(
             style={{
               height: 'fit-content',
             }}
-            flexBasis="33.33%"
+            flexBasis="35%"
           >
             <Invoice data={data} />
           </XStack>

@@ -1,15 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { createClient } from '../services/supabase/client';
-import { User } from '@supabase/supabase-js';
+import { useAuthStore } from '@shared/stores';
 
 export const useAuth = () => {
-  const [user, setUser] = useState<User | null>(null);
+  const setUser = useAuthStore.use.setUser();
+  const user = useAuthStore.use.user();
 
   useEffect(() => {
     const getUser = async () => {
       const supabase = await createClient();
       const { data } = await supabase.auth.getUser();
-      setUser(data.user);
+      data.user && setUser(data.user);
     };
     getUser();
   }, []);

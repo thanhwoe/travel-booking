@@ -1,3 +1,5 @@
+import { REGEX } from '@shared/constants';
+
 export const generateDateRange = (start: string, end: string) => {
   const startDate = new Date(start);
   const endDate = new Date(end);
@@ -72,7 +74,7 @@ export const displayDate = (
   }
 };
 
-export const getNumberOfDays = (startDate: Date, endDate: Date) => {
+export const getNumberOfDays = (startDate?: Date, endDate?: Date) => {
   if (!startDate || !endDate) {
     return 0;
   }
@@ -81,7 +83,7 @@ export const getNumberOfDays = (startDate: Date, endDate: Date) => {
   const end = new Date(endDate);
 
   if (start instanceof Date && end instanceof Date) {
-    return Math.round((end.getTime() - start.getTime()) / 86400000);
+    return Math.round((end.getTime() - start.getTime()) / 86400000) || 1;
   }
   return 0;
 };

@@ -1,21 +1,33 @@
 'use client';
 
 import { Separator, XStack, YStack } from 'tamagui';
-import { Button, Checkbox, InputController, Text } from '../../universal';
+import {
+  Button,
+  Checkbox,
+  InputController,
+  Text,
+  Toast,
+} from '../../universal';
 import { useForm } from 'react-hook-form';
 import { IPaymentForm } from '@shared/interfaces';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { paymentSchema } from '@shared/constants';
 import { memo } from 'react';
+import { useRouter } from 'next/navigation';
 
 export const PaymentForm = memo(() => {
+  const router = useRouter();
   const { control, handleSubmit } = useForm<IPaymentForm>({
     resolver: zodResolver(paymentSchema),
     mode: 'onBlur',
     reValidateMode: 'onBlur',
   });
   const handleSubmitForm = (data: IPaymentForm) => {
-    console.log({ data });
+    Toast.success({
+      title: 'Success',
+      message: 'Payment successful',
+    });
+    router.push('/checkout/success');
   };
 
   return (

@@ -23,7 +23,6 @@ export const ProductDetailScreen: FC<ProductDetailScreenProps> = ({
   const insets = useSafeAreaInsets();
 
   const { data } = useGetProductDetail(id);
-  console.log({ id, data });
 
   const handleOrder = () => {
     navigation.navigate(SCREENS.CHECKOUT_ORDER, {
@@ -50,7 +49,7 @@ export const ProductDetailScreen: FC<ProductDetailScreenProps> = ({
         jc="space-between"
       >
         <Text size="small" color="$grey10">
-          From: <Text fontWeight="bold">$20</Text>
+          From: <Text fontWeight="bold">${data?.price}</Text>
           <Text>/night</Text>
         </Text>
         <Button w={144} onPress={handleOrder}>
