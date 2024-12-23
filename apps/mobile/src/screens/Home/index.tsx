@@ -13,7 +13,11 @@ import { View, YStack } from 'tamagui';
 import { RootTabScreenProps } from '../../interfaces';
 import { SCREENS } from '@shared/constants';
 import { displayDate } from '@shared/utils';
-import { useGetListProduct } from '../../services/apis/product';
+import {
+  useFavoriteProduct,
+  useGetListProduct,
+} from '../../services/apis/product';
+
 const TABS = [
   {
     value: 'all',
@@ -50,6 +54,8 @@ export const HomeScreen: FC<HomeScreenProps> = ({
     price: filters?.price,
   });
 
+  const { mutate: onFavoriteProduct } = useFavoriteProduct();
+
   const searchDisplay = useMemo(() => {
     if (!filters) return '';
     const { location, dates, guests } = filters || {};
@@ -71,7 +77,13 @@ export const HomeScreen: FC<HomeScreenProps> = ({
         },
       });
     };
-    return <CardItem data={item} onPress={handleOpen} />;
+    return (
+      <CardItem
+        data={item}
+        onPress={handleOpen}
+        onPressFavorite={onFavoriteProduct}
+      />
+    );
   }, []);
 
   const handleApplyFilter = (f: {

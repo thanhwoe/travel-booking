@@ -6,7 +6,10 @@ import { SCREENS } from '@shared/constants';
 import { FC, useCallback } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useGetListProduct } from '../../services/apis/product';
+import {
+  useFavoriteProduct,
+  useGetListFavoriteProduct,
+} from '../../services/apis/product';
 
 type FavoritesScreenProps = RootTabScreenProps<typeof SCREENS.FAVORITES>;
 
@@ -15,7 +18,10 @@ export const FavoritesScreen: FC<FavoritesScreenProps> = ({
 }) => {
   const insets = useSafeAreaInsets();
 
-  const { data, fetchNextPage, isRefetching, refetch } = useGetListProduct();
+  const { data, fetchNextPage, isRefetching, refetch } =
+    useGetListFavoriteProduct();
+
+  const { mutate: onFavoriteProduct } = useFavoriteProduct();
 
   const renderItem = useCallback(({ item }: { item: IRoom }) => {
     const handleOpen = (id: string) => {
@@ -29,7 +35,13 @@ export const FavoritesScreen: FC<FavoritesScreenProps> = ({
         },
       });
     };
-    return <CardItem data={item} onPress={handleOpen} />;
+    return (
+      <CardItem
+        data={item}
+        onPress={handleOpen}
+        onPressFavorite={onFavoriteProduct}
+      />
+    );
   }, []);
 
   return (

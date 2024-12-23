@@ -23,7 +23,7 @@ interface IProps {
 const HomePage = memo<IProps>(
   ({ getListProductAction, currentPage, query }) => {
     const { data: response } = useQuery({
-      queryKey: PRODUCT_KEY.all(currentPage, query),
+      queryKey: PRODUCT_KEY.list(currentPage, query),
       queryFn: () => getListProductAction(currentPage, query),
     });
 

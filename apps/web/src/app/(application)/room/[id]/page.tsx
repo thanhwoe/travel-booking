@@ -10,6 +10,7 @@ import {
   getProductDetailAction,
 } from '../../../actions/product';
 import { Metadata } from 'next';
+import { createClient } from 'apps/web/src/services/supabase/server';
 
 export async function generateStaticParams() {
   const { data } = await getListProductIDtAction();
@@ -44,6 +45,8 @@ export default async function Page({
   const { id } = await params;
 
   const queryClient = new QueryClient();
+  const supabase = await createClient();
+  const { data } = await supabase.auth.getUser();
 
   await queryClient.prefetchQuery({
     queryKey: PRODUCT_KEY.detail(id),
@@ -55,6 +58,7 @@ export default async function Page({
       <ProductDetailPage
         id={id}
         getProductDetailAction={getProductDetailAction}
+        user={data.user}
       />
     </HydrationBoundary>
   );

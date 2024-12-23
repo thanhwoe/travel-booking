@@ -34,13 +34,13 @@ export const getListProductAction = async (
     }
   }
 
-  const { data, error, count } = await queryBuilder;
+  const { data, error, count } = await queryBuilder.returns<IRoom[]>();
 
   if (error) {
     throw error;
   }
   return {
-    data: data as IRoom[],
+    data,
     count,
   };
 };
@@ -52,12 +52,12 @@ export const getProductDetailAction = async (id: string) => {
     .from('Product')
     .select('*')
     .eq('id', id)
-    .single();
+    .single<IRoom>();
 
   if (error) {
     notFound();
   }
-  return data as IRoom;
+  return data;
 };
 
 export const getListProductIDtAction = async () => {

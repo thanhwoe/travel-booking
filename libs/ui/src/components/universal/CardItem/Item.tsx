@@ -11,6 +11,7 @@ import { Heading } from '../Heading';
 interface IProps {
   data: IRoom;
   onPress?: (id: string) => void;
+  onPressFavorite?: (id: string) => void;
 }
 
 export const CardItem = memo<IProps>(({ data, onPress }) => {

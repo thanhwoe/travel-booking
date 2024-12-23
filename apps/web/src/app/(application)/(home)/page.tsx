@@ -24,7 +24,7 @@ export default async function Index({
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: PRODUCT_KEY.all(currentPage, query),
+    queryKey: PRODUCT_KEY.list(currentPage, query),
     queryFn: () => getListProductAction(currentPage, query),
   });
 

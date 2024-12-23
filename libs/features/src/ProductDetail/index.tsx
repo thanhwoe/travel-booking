@@ -21,6 +21,7 @@ import {
   StarIcon,
   WifiIcon,
 } from '@shared/ui/icons';
+import { User } from '@supabase/supabase-js';
 import { useQuery } from '@tanstack/react-query';
 import { memo } from 'react';
 import { Separator, XStack, YStack } from 'tamagui';
@@ -47,10 +48,11 @@ const FACILITIES = [
 interface IProps {
   getProductDetailAction: (id: string) => Promise<IRoom>;
   id: string;
+  user: User | null;
 }
 
 export const ProductDetailPage = memo<IProps>(
-  ({ getProductDetailAction, id }) => {
+  ({ getProductDetailAction, id, user }) => {
     const { data } = useQuery({
       queryKey: PRODUCT_KEY.detail(id),
       queryFn: getProductDetailAction.bind(null, id),
@@ -82,12 +84,12 @@ export const ProductDetailPage = memo<IProps>(
           </XStack>
           <XStack gap="$4">
             <XStack ai="center">
-              <ShareIcon width="$3" height="$3" />{' '}
-              <Text size="small">Share</Text>
+              <ShareIcon width="$3" height="$3" />
+              <Text size="small"> Share</Text>
             </XStack>
             <XStack ai="center">
-              <HeartIcon width="$3" height="$3" />{' '}
-              <Text size="small">Save</Text>
+              <HeartIcon width="$3" height="$3" />
+              <Text size="small"> Save</Text>
             </XStack>
           </XStack>
         </XStack>
@@ -135,7 +137,7 @@ export const ProductDetailPage = memo<IProps>(
             }}
             flexBasis="35%"
           >
-            <Invoice data={data} />
+            <Invoice data={data} user={user} />
           </XStack>
         </XStack>
         <Separator my="$9" />

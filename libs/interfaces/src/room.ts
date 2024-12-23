@@ -19,4 +19,11 @@ export interface IRoom {
   type: string;
   descriptionImage: string;
   location: string;
+  isFavorite?: boolean;
+}
+
+export interface IFavorites {
+  id: number;
+  userId: string;
+  favorites: string[];
 }

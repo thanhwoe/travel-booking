@@ -9,6 +9,7 @@ import { Metrics } from '../../../themes';
 interface IProps {
   data: IRoom;
   onPress?: (id: string) => void;
+  onPressFavorite?: (id: string) => void;
 }
 
 const FavoriteButton = styled(Button, {
@@ -23,8 +24,8 @@ const FavoriteButton = styled(Button, {
   w: 36,
 });
 
-export const CardItem = memo<IProps>(({ data, onPress }) => {
-  const { id, imageUrl, name, price, star, type } = data || {};
+export const CardItem = memo<IProps>(({ data, onPress, onPressFavorite }) => {
+  const { id, imageUrl, name, price, star, type, isFavorite } = data || {};
 
   return (
     <YStack mb="$6" mx="$5" onPress={onPress?.bind(null, id)}>
@@ -47,8 +48,8 @@ export const CardItem = memo<IProps>(({ data, onPress }) => {
           <Text fontWeight="bold">${price}</Text>/night
         </Text>
       </XStack>
-      <FavoriteButton>
-        <HeartIcon />
+      <FavoriteButton onPress={onPressFavorite?.bind(null, id)}>
+        <HeartIcon {...(isFavorite && { color: '$red10' })} />
       </FavoriteButton>
     </YStack>
   );

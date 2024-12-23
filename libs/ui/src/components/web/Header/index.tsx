@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { Navigator } from './navigator';
 import { BellIcon, ChatIcon, Logo, LogoutIcon } from '../../../icons';
 import { Button, Image } from '../../universal';
-import { useAuthStore } from '@shared/stores';
 
 const NAVIGATORS = [
   {
@@ -30,7 +29,6 @@ interface IProps {
 
 const Header = ({ onSignOut, isAuth }: IProps) => {
   const pathname = usePathname();
-  const clearUser = useAuthStore.use.clearUser();
 
   return (
     <XStack px="$6" py="$0.5" jc="space-between" alignItems="center">
@@ -62,7 +60,6 @@ const Header = ({ onSignOut, isAuth }: IProps) => {
             cursor="pointer"
             onPress={() => {
               onSignOut?.();
-              clearUser();
             }}
           />
         </XStack>

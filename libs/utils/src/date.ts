@@ -83,7 +83,8 @@ export const getNumberOfDays = (startDate?: Date, endDate?: Date) => {
   const end = new Date(endDate);
 
   if (start instanceof Date && end instanceof Date) {
-    return Math.round((end.getTime() - start.getTime()) / 86400000) || 1;
+    const day = Math.round((end.getTime() - start.getTime()) / 86400000);
+    return day < 0 ? 0 : day === 0 ? 1 : day;
   }
   return 0;
 };

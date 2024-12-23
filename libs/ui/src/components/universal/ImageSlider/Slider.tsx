@@ -13,6 +13,7 @@ const settings: Settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
   autoplay: true,
+  arrows: false,
 };
 
 interface IProps {

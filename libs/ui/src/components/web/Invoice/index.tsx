@@ -9,18 +9,19 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { invoiceSchema } from '@shared/constants';
 import { memo, useMemo } from 'react';
 import { getNumberOfDays } from '@shared/utils';
-import { useAuthStore, useCheckoutStore } from '@shared/stores';
+import { useCheckoutStore } from '@shared/stores';
 import { useRouter } from 'next/navigation';
+import { User } from '@supabase/supabase-js';
 
 const FEES = 12;
 
 interface IProps {
   data?: IRoom;
+  user: User | null;
 }
 
-export const Invoice = memo<IProps>(({ data }) => {
+export const Invoice = memo<IProps>(({ data, user }) => {
   const { price = 0 } = data || {};
-  const user = useAuthStore.use.user();
   const setOrder = useCheckoutStore.use.setOrder();
   const router = useRouter();
 
