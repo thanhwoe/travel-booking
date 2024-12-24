@@ -3,7 +3,8 @@
 import { Accordion, Square, XStack } from 'tamagui';
 import { Checkbox, Text } from '../../universal';
 import { ChevronDownIcon } from '../../../icons';
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { useQueryStates, parseAsString } from 'nuqs';
 
 const FILTERS = [
   {
@@ -53,18 +54,29 @@ const FILTERS = [
 ];
 
 const AccordionFilter = () => {
+  const [queryParams, setQueryParams] = useQueryStates(
+    {
+      type: parseAsString.withDefault(''),
+      price: parseAsString.withDefault(''),
+    },
+    {
+      urlKeys: {
+        type: 'type',
+        price: 'price',
+      },
+      history: 'push',
+      shallow: false,
+    }
+  );
   const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
   const params = new URLSearchParams(searchParams);
 
   const handleChange = (checked: boolean, key: string, value: string) => {
     if (checked) {
-      params.set(key, value);
+      setQueryParams({ [key]: value });
     } else {
-      params.delete(key);
+      setQueryParams({ [key]: null });
     }
-    replace(`${pathname}?${params.toString()}`);
   };
 
   return (
@@ -100,7 +112,10 @@ const AccordionFilter = () => {
                 {item.items.map((i) => (
                   <XStack key={i.label} py="$2" gap="$1">
                     <Checkbox
-                      checked={params.get(item.key) === i.value}
+                      checked={
+                        queryParams.type === i.value ||
+                        queryParams.price === i.value
+                      }
                       onCheckedChange={(checked: boolean) => {
                         handleChange(checked, item.key, i.value);
                       }}

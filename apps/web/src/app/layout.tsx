@@ -3,6 +3,7 @@ import './global.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Toast } from '@shared/ui/components/universal/Toast';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 export const metadata = {
   title: 'Welcome to Travel Booking',
@@ -25,7 +26,7 @@ export default function RootLayout({
         </head>
         <body>
           <NextTamaguiProvider>
-            {children}
+            <NuqsAdapter>{children}</NuqsAdapter>
             <Toast />
           </NextTamaguiProvider>
         </body>
@@ -37,7 +38,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <NextTamaguiProvider>
-          {children}
+          <NuqsAdapter>{children}</NuqsAdapter>
           <Toast />
         </NextTamaguiProvider>
       </body>
