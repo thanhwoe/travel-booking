@@ -106,7 +106,7 @@ export const NextTamaguiProvider = ({ children }: { children: ReactNode }) => {
             __html: tamaguiConfig.getNewCSS(),
           }}
         />
-        <style
+        {/* <style
           dangerouslySetInnerHTML={{
             __html: tamaguiConfig.getCSS({
               // if you are using "outputCSS" option, you should use this "exclude"
@@ -115,7 +115,7 @@ export const NextTamaguiProvider = ({ children }: { children: ReactNode }) => {
                 process.env.NODE_ENV === 'production' ? 'design-system' : null,
             }),
           }}
-        />
+        /> */}
         <style jsx global>{`
           html {
             font-family: 'Montserrat', sans-serif;

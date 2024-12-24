@@ -9,7 +9,7 @@ export const Skeleton = ({ height }: IProps) => {
   return (
     <div
       className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm ${
-        height ? `min-h-[${height}px]` : 'min-h-screen'
+        height ? 'h-[' + height + 'px]' : 'min-h-screen'
       } w-full`}
     >
       <div className="flex p-4">
