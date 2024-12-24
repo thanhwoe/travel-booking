@@ -27,6 +27,49 @@ export const NextTamaguiProvider = ({ children }: { children: ReactNode }) => {
     const rnwStyle = StyleSheet.getSheet();
     return (
       <>
+        <link
+          rel="preload"
+          as="font"
+          type="font/ttf"
+          href="/assets/fonts/OpenSans-Bold.ttf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          as="font"
+          type="font/ttf"
+          href="/assets/fonts/OpenSans-Light.ttf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          as="font"
+          type="font/ttf"
+          href="/assets/fonts/OpenSans-Regular.ttf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          as="font"
+          type="font/ttf"
+          href="/assets/fonts/Montserrat-Bold.ttf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          as="font"
+          type="font/ttf"
+          href="/assets/fonts/Montserrat-Light.ttf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          as="font"
+          type="font/ttf"
+          href="/assets/fonts/Montserrat-Regular.ttf"
+          crossOrigin="anonymous"
+        />
+
         <style
           dangerouslySetInnerHTML={{ __html: rnwStyle.textContent }}
           id={rnwStyle.id}
