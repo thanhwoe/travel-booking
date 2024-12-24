@@ -11,6 +11,8 @@ import {
 } from '../../../actions/product';
 import { Metadata } from 'next';
 import { createClient } from 'apps/web/src/services/supabase/server';
+import { Suspense } from 'react';
+import { Skeleton } from '@shared/ui/components/web/Skeleton';
 
 export async function generateStaticParams() {
   const { data } = await getListProductIDtAction();
@@ -55,11 +57,13 @@ export default async function Page({
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <ProductDetailPage
-        id={id}
-        getProductDetailAction={getProductDetailAction}
-        user={data.user}
-      />
+      <Suspense fallback={<Skeleton />}>
+        <ProductDetailPage
+          id={id}
+          getProductDetailAction={getProductDetailAction}
+          user={data.user}
+        />
+      </Suspense>
     </HydrationBoundary>
   );
 }

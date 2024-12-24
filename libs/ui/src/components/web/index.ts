@@ -7,3 +7,4 @@ export * from './Review';
 export * from './ImageDetail';
 export * from './PaymentForm';
 export * from './Bill';
+export * from './Skeleton';
