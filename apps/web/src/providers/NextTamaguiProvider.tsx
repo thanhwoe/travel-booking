@@ -9,17 +9,41 @@ import { useServerInsertedHTML } from 'next/navigation';
 import { NextThemeProvider } from '@tamagui/next-theme';
 import { TamaguiProvider } from 'tamagui';
 import { tamaguiConfig } from '@shared/ui/themes';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  defaultShouldDehydrateQuery,
+  isServer,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 import { ToastProvider } from '@tamagui/toast';
 
-export const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      staleTime: 60 * 1000,
+function makeQueryClient() {
+  return new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        staleTime: 60 * 1000,
+      },
+      // dehydrate: {
+      //   // include pending queries in dehydration
+      //   shouldDehydrateQuery: (query) =>
+      //     defaultShouldDehydrateQuery(query) ||
+      //     query.state.status === 'pending',
+      // },
     },
-  },
-});
+  });
+}
+
+let browserQueryClient: QueryClient | undefined = undefined;
+
+function getQueryClient() {
+  if (isServer) {
+    return makeQueryClient();
+  } else {
+    if (!browserQueryClient) browserQueryClient = makeQueryClient();
+    return browserQueryClient;
+  }
+}
 
 export const NextTamaguiProvider = ({ children }: { children: ReactNode }) => {
   useServerInsertedHTML(() => {
@@ -100,6 +124,8 @@ export const NextTamaguiProvider = ({ children }: { children: ReactNode }) => {
       </>
     );
   });
+
+  const queryClient = getQueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>

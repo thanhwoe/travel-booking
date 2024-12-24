@@ -9,7 +9,7 @@ const AccordionFilter = dynamic(
 
 export default function Template({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex justify-center mt-[60px] gap-[60px]">
+    <div className="flex justify-center mt-[60px] gap-[60px] md:w-[1200px] mx-auto">
       <Suspense>
         <AccordionFilter />
       </Suspense>
