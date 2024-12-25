@@ -3,7 +3,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
-import { ProductDetailPage } from '@shared/features/ProductDetail';
+// import { ProductDetailPage } from '@shared/features/ProductDetail';
 import { PRODUCT_KEY } from '@shared/constants';
 import {
   getListProductIDtAction,
@@ -11,6 +11,12 @@ import {
 } from '../../../actions/product';
 import { Metadata } from 'next';
 import { createClient } from 'apps/web/src/services/supabase/server';
+import dynamic from 'next/dynamic';
+
+const ProductDetailPage = dynamic(
+  () => import('@shared/features/ProductDetail'),
+  { ssr: false }
+);
 
 export async function generateStaticParams() {
   const { data } = await getListProductIDtAction();

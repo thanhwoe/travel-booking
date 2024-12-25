@@ -106,7 +106,7 @@ export const NextTamaguiProvider = ({ children }: { children: ReactNode }) => {
             __html: tamaguiConfig.getNewCSS(),
           }}
         />
-        {/* <style
+        <style
           dangerouslySetInnerHTML={{
             __html: tamaguiConfig.getCSS({
               // if you are using "outputCSS" option, you should use this "exclude"
@@ -115,7 +115,14 @@ export const NextTamaguiProvider = ({ children }: { children: ReactNode }) => {
                 process.env.NODE_ENV === 'production' ? 'design-system' : null,
             }),
           }}
-        /> */}
+        />
+
+        <script
+          dangerouslySetInnerHTML={{
+            // avoid flash of animated things on enter:
+            __html: `document.documentElement.classList.add('t_unmounted')`,
+          }}
+        />
         <style jsx global>{`
           html {
             font-family: 'Montserrat', sans-serif;
@@ -130,7 +137,7 @@ export const NextTamaguiProvider = ({ children }: { children: ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <NextThemeProvider skipNextHead>
-        <TamaguiProvider config={tamaguiConfig}>
+        <TamaguiProvider config={tamaguiConfig} disableRootThemeClass>
           <ToastProvider>{children}</ToastProvider>
         </TamaguiProvider>
       </NextThemeProvider>

@@ -44283,7 +44283,8 @@ var tamaguiConfig = createTamagui({
   onlyAllowShorthands: false,
   animations,
   settings: {
-    allowedStyleValues: "somewhat-strict"
+    allowedStyleValues: "somewhat-strict",
+    disableRootThemeClass: true
   },
   fonts: {
     heading: headingFont2,

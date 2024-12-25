@@ -14,11 +14,11 @@ const NAVIGATORS = [
   },
   {
     name: 'Destinations',
-    path: '/destinations',
+    path: '#',
   },
   {
     name: 'Bookings',
-    path: '/bookings',
+    path: '#',
   },
 ];
 
@@ -31,7 +31,7 @@ const Header = ({ onSignOut, isAuth }: IProps) => {
   const pathname = usePathname();
 
   return (
-    <XStack px="$6" py="$0.5" jc="space-between" alignItems="center">
+    <XStack px="$6" py="$0.5" jc="space-between" alignItems="center" h={58}>
       <XStack gap="$6" alignItems="center">
         <Logo width="$10" height="$10" />
         {NAVIGATORS.map(({ name, path }) => (
@@ -64,7 +64,7 @@ const Header = ({ onSignOut, isAuth }: IProps) => {
           />
         </XStack>
       ) : (
-        <XStack gap="$4" alignItems="center">
+        <XStack gap="$4" alignItems="center" w={202}>
           <Link href="/login">
             <Button variant="secondary" px="$4">
               Sign in

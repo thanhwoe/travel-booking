@@ -4,10 +4,11 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
+import dynamic from 'next/dynamic';
 
-import HomePage from '@shared/features/Home';
+// import HomePage from '@shared/features/Home';
 import { PRODUCT_KEY } from '@shared/constants';
-
+const HomePage = dynamic(() => import('@shared/features/Home'), { ssr: false });
 export default async function Index({
   searchParams,
 }: {

@@ -21,14 +21,28 @@ interface IProps {
 export const ImageDetail = memo<IProps>(({ data }) => {
   return (
     <XStack ai="center" gap="$2" mt="$5" mb="$11">
-      <Image
+      {/* <Image
         alt="Image"
         src={data[0]}
         width={800}
         height={668}
         className="w-full h-[668px]"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
-      />
+      /> */}
+      <Stack f={1} height={668}>
+        <Image
+          src={data[0]}
+          // width={800}
+          fill
+          // className="w-full h-[668px]"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
+          // height={668}
+          alt="Image"
+          quality={100}
+          priority
+          loading="eager"
+        />
+      </Stack>
       <Stack
         w={280}
         overflow="hidden"

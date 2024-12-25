@@ -51,7 +51,7 @@ interface IProps {
   user: User | null;
 }
 
-export const ProductDetailPage = memo<IProps>(
+const ProductDetailPage = memo<IProps>(
   ({ getProductDetailAction, id, user }) => {
     const { data } = useQuery({
       queryKey: PRODUCT_KEY.detail(id),
@@ -70,19 +70,19 @@ export const ProductDetailPage = memo<IProps>(
     } = data || {};
 
     return (
-      <YStack pb="$24" mt="$7">
+      <YStack pb="$24" mt="$7" height={2142}>
         <Heading size="huge" style={{ width: 'fit-content' }}>
           {name}
         </Heading>
         <XStack jc="space-between">
-          <XStack>
+          <XStack h={22}>
             <StarIcon mt={2} />
             <Text size="small">
               <Text fontWeight="bold">{star}</Text>
               <Text color="$grey10">({review} reviews)</Text> • {location}
             </Text>
           </XStack>
-          <XStack gap="$4">
+          <XStack gap="$4" h={22}>
             <XStack ai="center">
               <ShareIcon width="$3" height="$3" />
               <Text size="small"> Share</Text>
@@ -161,3 +161,4 @@ export const ProductDetailPage = memo<IProps>(
     );
   }
 );
+export default ProductDetailPage;

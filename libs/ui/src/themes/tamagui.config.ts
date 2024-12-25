@@ -44,6 +44,7 @@ export const tamaguiConfig = createTamagui({
   animations,
   settings: {
     allowedStyleValues: 'somewhat-strict',
+    disableRootThemeClass: true,
   },
   fonts: {
     heading: headingFont,

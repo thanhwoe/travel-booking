@@ -1,7 +1,16 @@
 import { signOutAction } from '../actions/auth';
-import Footer from '@shared/ui/components/web/Footer';
-import Header from '@shared/ui/components/web/Header';
+// import Footer from '@shared/ui/components/web/Footer';
+// import Header from '@shared/ui/components/web/Header';
 import { createClient } from '../../services/supabase/server';
+import dynamic from 'next/dynamic';
+
+const Header = dynamic(() => import('@shared/ui/components/web/Header'), {
+  ssr: false,
+});
+
+// const Footer = dynamic(() => import('@shared/ui/components/web/Footer'), {
+//   ssr: false,
+// });
 
 export default async function Template({
   children,
@@ -14,7 +23,9 @@ export default async function Template({
     <div className="min-h-screen flex flex-col justify-between">
       <Header onSignOut={signOutAction} isAuth={!!data.user} />
       {children}
-      <Footer />
+      {/* <div className="w-full h-[281px]">
+        <Footer />
+      </div> */}
     </div>
   );
 }

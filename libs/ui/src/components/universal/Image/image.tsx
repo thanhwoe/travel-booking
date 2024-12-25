@@ -18,7 +18,6 @@ export const Image = memo<ImageProps>(({ src, ...props }) => {
 
   return (
     <NextImage
-      priority
       src={imgSrc}
       placeholder="blur"
       onLoad={handleLoad}

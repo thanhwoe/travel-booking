@@ -60,7 +60,7 @@ const FOOTER_ITEM = [
 
 const Footer = () => {
   return (
-    <YStack px={132} backgroundColor="$grey60" mt="auto">
+    <YStack px={132} backgroundColor="$grey60" mt="auto" height={281}>
       <XStack
         gap={128}
         borderBottomWidth="$px"
@@ -80,7 +80,7 @@ const Footer = () => {
             ))}
           </YStack>
         ))}
-        <YStack>
+        {/* <YStack>
           <Text fontWeight="bold" size="extraLarge">
             Subscribe to our newsletter
           </Text>
@@ -104,11 +104,11 @@ const Footer = () => {
               Subscribe
             </Button>
           </XStack>
-        </YStack>
+        </YStack> */}
       </XStack>
       <XStack py="$5" justifyContent="space-between">
         <Text>© 2022 Company, Inc. • Privacy • Terms</Text>
-        <XStack gap="$4">
+        <XStack gap="$4" h={22} w={92}>
           <FacebookIcon width="$5" height="$5" />
           <AppleIcon width="$5" height="$5" />
           <GoogleIcon width="$5" height="$5" />
