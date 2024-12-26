@@ -14,7 +14,7 @@ interface IProps {
   onPressFavorite?: (id: string) => void;
 }
 
-export const CardItem = memo<IProps>(({ data, onPress }) => {
+export const CardItem = memo<IProps>(({ data, onPress, onPressFavorite }) => {
   const {
     amenities,
     id,
@@ -26,6 +26,7 @@ export const CardItem = memo<IProps>(({ data, onPress }) => {
     star,
     type,
     variants,
+    isFavorite,
   } = data || {};
 
   return (
@@ -37,7 +38,14 @@ export const CardItem = memo<IProps>(({ data, onPress }) => {
           <Text size="small" mb="$0.5">
             {type} in {location}
           </Text>
-          <HeartIcon />
+          <HeartIcon
+            onPress={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onPressFavorite?.(id);
+            }}
+            {...(isFavorite && { color: '$red10' })}
+          />
         </XStack>
         <Heading>{name}</Heading>
         <Separator w={56} mt="$3" mb="$2" />

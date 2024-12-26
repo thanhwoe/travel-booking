@@ -54,7 +54,10 @@ export const HomeScreen: FC<HomeScreenProps> = ({
     price: filters?.price,
   });
 
-  const { mutate: onFavoriteProduct } = useFavoriteProduct();
+  const { mutate: onFavoriteProduct } = useFavoriteProduct({
+    type: tab,
+    price: filters?.price,
+  });
 
   const searchDisplay = useMemo(() => {
     if (!filters) return '';
@@ -77,6 +80,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({
         },
       });
     };
+
     return (
       <CardItem
         data={item}

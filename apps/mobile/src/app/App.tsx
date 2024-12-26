@@ -11,6 +11,11 @@ import BootSplash from 'react-native-bootsplash';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ToastProvider } from '@tamagui/toast';
 import { Toast } from '@shared/ui/components';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([
+  '[Reanimated] Reading from `value` during component render. Please ensure that you do not access the `value` property or use `get` method of a shared value while React is rendering a component.',
+]);
 
 const queryClient = new QueryClient({
   defaultOptions: {

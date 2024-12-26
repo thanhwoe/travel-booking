@@ -1,4 +1,5 @@
 import {
+  InfiniteData,
   useInfiniteQuery,
   useMutation,
   useQuery,
@@ -12,6 +13,7 @@ import {
 } from '../product';
 import { PRODUCT_KEY } from '@shared/constants';
 import { IListProductQuery } from '../../interfaces';
+import { IRoom } from '@shared/interfaces';
 
 export const useGetListProduct = (query?: IListProductQuery) => {
   const { isFetchingNextPage, data, hasNextPage, fetchNextPage, ...rest } =
@@ -20,12 +22,11 @@ export const useGetListProduct = (query?: IListProductQuery) => {
       queryFn: ({ pageParam }) => getListProductAction(pageParam, query),
       initialPageParam: 1,
       getNextPageParam: (lastPage, allPages) => {
-        const nextPage = lastPage?.length ? allPages?.length : undefined;
+        if (!lastPage || lastPage.length === 0) return undefined;
 
-        return nextPage;
+        return allPages.length + 1;
       },
     });
-
   return {
     data: data?.pages.flat() || [],
     isLoadingBreathings: isFetchingNextPage,
@@ -41,12 +42,32 @@ export const useGetProductDetail = (id: string) => {
   });
 };
 
-export const useFavoriteProduct = () => {
+export const useFavoriteProduct = (query?: IListProductQuery) => {
   const queryClient = useQueryClient();
+
+  const queryKey = PRODUCT_KEY.list(1, query);
 
   return useMutation({
     mutationFn: favoriteProductAction,
-    onSuccess: () => {
+    onMutate: async (id: string) => {
+      await queryClient.cancelQueries({ queryKey });
+      const previous = queryClient.getQueryData(queryKey);
+
+      queryClient.setQueryData<InfiniteData<IRoom[]>>(queryKey, (oldData) => {
+        const newData = oldData?.pages.map((page) =>
+          page.map((item) =>
+            item.id === id ? { ...item, isFavorite: !item.isFavorite } : item
+          )
+        );
+        return {
+          ...oldData,
+          pages: newData,
+        };
+      });
+
+      return { previous };
+    },
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: PRODUCT_KEY.lists() });
     },
   });
@@ -59,9 +80,9 @@ export const useGetListFavoriteProduct = () => {
       queryFn: ({ pageParam }) => getListFavoriteProductAction(pageParam),
       initialPageParam: 1,
       getNextPageParam: (lastPage, allPages) => {
-        const nextPage = lastPage?.length ? allPages?.length : undefined;
+        if (!lastPage || lastPage.length === 0) return undefined;
 
-        return nextPage;
+        return allPages.length + 1;
       },
     });
 

@@ -8,7 +8,7 @@ import { IInvoiceForm, IRoom } from '@shared/interfaces';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { invoiceSchema } from '@shared/constants';
 import { memo, useMemo } from 'react';
-import { getNumberOfDays } from '@shared/utils';
+import { formatDate, getNumberOfDays } from '@shared/utils';
 import { useCheckoutStore } from '@shared/stores';
 import { useRouter } from 'next/navigation';
 import { User } from '@supabase/supabase-js';
@@ -21,7 +21,7 @@ interface IProps {
 }
 
 export const Invoice = memo<IProps>(({ data, user }) => {
-  const { price = 0 } = data || {};
+  const { price = 0, star } = data || {};
   const setOrder = useCheckoutStore.use.setOrder();
   const router = useRouter();
 
@@ -49,10 +49,11 @@ export const Invoice = memo<IProps>(({ data, user }) => {
 
   const handleSubmitForm = (payload: IInvoiceForm) => {
     if (!user) {
-      return Toast.error({
+      Toast.error({
         title: 'Sign in first',
         message: 'Please sign in first',
       });
+      return;
     }
     if (data) {
       setOrder({
@@ -84,7 +85,7 @@ export const Invoice = memo<IProps>(({ data, user }) => {
         </Text>
         <XStack ai="center">
           <StarIcon />
-          <Text fontWeight="bold">4.8</Text>
+          <Text fontWeight="bold">{star}</Text>
         </XStack>
       </XStack>
       <XStack jc="space-between" mt="$7" flexWrap="wrap">
@@ -92,6 +93,7 @@ export const Invoice = memo<IProps>(({ data, user }) => {
           control={control}
           name="startDate"
           label="Check in"
+          format={formatDate}
           placeholder="mm/dd/yyyy"
         />
         <InputController<IInvoiceForm>
@@ -99,6 +101,7 @@ export const Invoice = memo<IProps>(({ data, user }) => {
           name="endDate"
           label="Check out"
           placeholder="mm/dd/yyyy"
+          format={formatDate}
         />
       </XStack>
       <InputController<IInvoiceForm>

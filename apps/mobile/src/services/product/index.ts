@@ -44,6 +44,10 @@ export const getListProductAction = async (
     isFavorite: favorites?.favorites.includes(item.id),
   }));
 
+  if (query?.favorite) {
+    return result.filter((item) => item.isFavorite);
+  }
+
   return result;
 };
 
@@ -96,6 +100,7 @@ export const favoriteProductAction = async (id: string) => {
   if (error) {
     throw error;
   }
+  return id;
 };
 
 export const getListFavoriteProductAction = async (page: number) => {

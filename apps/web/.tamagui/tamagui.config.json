@@ -34877,7 +34877,6 @@
     "themeClassNameOnRoot": true,
     "settings": {
       "defaultFont": "body",
-      "disableRootThemeClass": true,
       "onlyAllowShorthands": false,
       "themeClassNameOnRoot": true,
       "webContainerType": "inline-size",

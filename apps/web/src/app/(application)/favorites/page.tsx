@@ -30,9 +30,11 @@ export default async function Index({
   const supabase = await createClient();
   const { data } = await supabase.auth.getUser();
 
+  const currentQuery = { ...query, favorite: true };
+
   await queryClient.prefetchQuery({
-    queryKey: PRODUCT_KEY.list(currentPage, query),
-    queryFn: () => getListProductAction(currentPage, query),
+    queryKey: PRODUCT_KEY.list(currentPage, currentQuery),
+    queryFn: () => getListProductAction(currentPage, currentQuery),
   });
 
   return (
@@ -41,7 +43,7 @@ export default async function Index({
         getListProductAction={getListProductAction}
         currentPage={currentPage}
         favoriteProductAction={favoriteProductAction}
-        query={query}
+        query={currentQuery}
         user={data.user}
       />
     </HydrationBoundary>

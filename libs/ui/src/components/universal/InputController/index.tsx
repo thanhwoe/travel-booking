@@ -18,6 +18,7 @@ interface InputControllerProps<T extends FieldValues>
   control: Control<T>;
   rules?: RegisterOptions<T>;
   containerStyle?: GetProps<typeof YStack>;
+  format?: (value: string) => void;
 }
 
 const Component = <T extends FieldValues>({
@@ -25,6 +26,7 @@ const Component = <T extends FieldValues>({
   control,
   rules,
   containerStyle,
+  format,
   label,
   ...props
 }: InputControllerProps<T>) => {
@@ -43,7 +45,7 @@ const Component = <T extends FieldValues>({
       <XStack gap="$4">
         <Input
           value={value}
-          onChangeText={onChange}
+          onChangeText={format ? (t) => onChange(format(t)) : onChange}
           onEndEditing={() => onChange(value?.trim())}
           h={52}
           autoCapitalize="none"

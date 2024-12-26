@@ -13,8 +13,8 @@ const NAVIGATORS = [
     path: '/',
   },
   {
-    name: 'Destinations',
-    path: '#',
+    name: 'Favorites',
+    path: '/favorites',
   },
   {
     name: 'Bookings',

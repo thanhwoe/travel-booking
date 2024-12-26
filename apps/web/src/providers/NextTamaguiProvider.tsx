@@ -116,13 +116,13 @@ export const NextTamaguiProvider = ({ children }: { children: ReactNode }) => {
             }),
           }}
         />
-
+        {/*
         <script
           dangerouslySetInnerHTML={{
             // avoid flash of animated things on enter:
             __html: `document.documentElement.classList.add('t_unmounted')`,
           }}
-        />
+        /> */}
         <style jsx global>{`
           html {
             font-family: 'Montserrat', sans-serif;
@@ -137,7 +137,7 @@ export const NextTamaguiProvider = ({ children }: { children: ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <NextThemeProvider skipNextHead>
-        <TamaguiProvider config={tamaguiConfig} disableRootThemeClass>
+        <TamaguiProvider config={tamaguiConfig}>
           <ToastProvider>{children}</ToastProvider>
         </TamaguiProvider>
       </NextThemeProvider>

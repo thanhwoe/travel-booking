@@ -3,7 +3,6 @@
 import { Accordion, Square, XStack } from 'tamagui';
 import { Checkbox, Text } from '../../universal';
 import { ChevronDownIcon } from '../../../icons';
-import { useSearchParams } from 'next/navigation';
 import { useQueryStates, parseAsString } from 'nuqs';
 
 const FILTERS = [
@@ -68,8 +67,6 @@ const AccordionFilter = () => {
       shallow: false,
     }
   );
-  const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams);
 
   const handleChange = (checked: boolean, key: string, value: string) => {
     if (checked) {
@@ -85,7 +82,7 @@ const AccordionFilter = () => {
       type="multiple"
       gap="$6"
       $gtLg={{ width: 256 }}
-      defaultValue={Array.from(params.keys())}
+      value={['price', 'type']}
     >
       {FILTERS.map((item) => {
         return (

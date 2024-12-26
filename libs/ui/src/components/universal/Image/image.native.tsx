@@ -9,6 +9,7 @@ export const Image = memo<ImageProps>(({ src, width, height }) => {
       source={{
         uri: src,
         priority: FastImage.priority.normal,
+        cache: FastImage.cacheControl.cacheOnly,
       }}
       resizeMode={FastImage.resizeMode.cover}
     />

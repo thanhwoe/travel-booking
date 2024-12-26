@@ -103,3 +103,16 @@ export const getFormattedTime = (date: Date) => {
 
   return `${formattedHours}:${formattedMinutes} ${ampm}`;
 };
+
+export const formatDate = (value: string) => {
+  const numbersOnly = value.replace(/\D/g, '');
+
+  const mm = numbersOnly.slice(0, 2);
+  const dd = numbersOnly.slice(2, 4);
+  const yyyy = numbersOnly.slice(4, 8);
+
+  let formattedValue = mm;
+  if (dd) formattedValue += `/${dd}`;
+  if (yyyy) formattedValue += `/${yyyy}`;
+  return formattedValue;
+};
