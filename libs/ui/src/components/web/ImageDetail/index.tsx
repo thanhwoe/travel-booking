@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { Stack, XStack } from 'tamagui';
 import Slider, { Settings } from 'react-slick';
 import { Image } from '../../universal';
@@ -19,6 +19,8 @@ interface IProps {
 }
 
 export const ImageDetail = memo<IProps>(({ data }) => {
+  const [mainImage, setMainImage] = useState(data[0]);
+
   return (
     <XStack ai="center" gap="$2" mt="$5" mb="$11">
       {/* <Image
@@ -31,7 +33,8 @@ export const ImageDetail = memo<IProps>(({ data }) => {
       /> */}
       <Stack f={1} height={668}>
         <Image
-          src={data[0]}
+          src={mainImage}
+          key={mainImage}
           // width={800}
           fill
           // className="w-full h-[668px]"
@@ -51,7 +54,14 @@ export const ImageDetail = memo<IProps>(({ data }) => {
       >
         <Slider {...settings}>
           {data.map((image, index) => (
-            <Stack key={index} width={280} height={218}>
+            <Stack
+              key={index}
+              width={280}
+              height={218}
+              onPress={() => {
+                setMainImage(image);
+              }}
+            >
               <Image
                 src={image}
                 fill

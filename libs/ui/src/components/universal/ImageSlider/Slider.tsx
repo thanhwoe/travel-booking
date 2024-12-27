@@ -5,6 +5,7 @@ import Slider, { Settings } from 'react-slick';
 import { Stack, ViewStyle } from 'tamagui';
 import { StyleProp } from 'react-native';
 import { Image } from '../Image';
+import { useRouter } from 'next/navigation';
 
 const settings: Settings = {
   dots: false,
@@ -21,17 +22,23 @@ interface IProps {
   height?: number;
   style?: StyleProp<ViewStyle>;
   data: string[];
+  id?: string;
 }
 
 export const ImageSlider = memo<IProps>(
-  ({ height = 200, style, width = 400, data }) => {
+  ({ height = 200, style, width = 400, data, id }) => {
+    const { push } = useRouter();
     return (
       <Stack
         w={width}
         borderRadius="$2"
         style={style as any}
         overflow="hidden"
-        onPress={(e) => e.stopPropagation()}
+        onPress={(e) => {
+          push(`/room/${id}`);
+          e.stopPropagation();
+          e.preventDefault();
+        }}
       >
         <Slider
           {...settings}
