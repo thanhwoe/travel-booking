@@ -12,6 +12,7 @@ export const Image = memo<ImageProps>(({ src, width, height }) => {
         cache: FastImage.cacheControl.cacheOnly,
       }}
       resizeMode={FastImage.resizeMode.cover}
+      defaultSource={require('./fallback.png')}
     />
   );
 });

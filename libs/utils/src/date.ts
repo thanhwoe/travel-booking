@@ -1,5 +1,3 @@
-import { REGEX } from '@shared/constants';
-
 export const generateDateRange = (start: string, end: string) => {
   const startDate = new Date(start);
   const endDate = new Date(end);
