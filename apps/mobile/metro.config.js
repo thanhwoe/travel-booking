@@ -19,17 +19,6 @@ const customConfig = {
     assetExts: assetExts.filter((ext) => ext !== 'svg'),
     sourceExts: [...sourceExts, 'cjs', 'mjs', 'svg'],
   },
-  reporter: {
-    update(event) {
-      if (event.type === 'log' && event.log && event.log.level === 'warn') {
-        if (!event.log.data.includes('Reanimated')) {
-          console.log(event.log.data);
-        }
-      } else {
-        console.log(event.log.data);
-      }
-    },
-  },
 };
 
 module.exports = withNxMetro(mergeConfig(defaultConfig, customConfig), {

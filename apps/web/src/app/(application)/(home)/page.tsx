@@ -13,6 +13,7 @@ import dynamic from 'next/dynamic';
 import { PRODUCT_KEY } from '@shared/constants';
 import { createClient } from 'apps/web/src/services/supabase/server';
 const HomePage = dynamic(() => import('@shared/features/Home'), { ssr: false });
+
 export default async function Index({
   searchParams,
 }: {

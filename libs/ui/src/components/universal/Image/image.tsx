@@ -1,9 +1,10 @@
-import NextImage, { ImageProps } from 'next/image';
+import NextImage from 'next/image';
 import { memo, useCallback, useState } from 'react';
+import { IImageProps } from '.';
 
 const fallback = '/assets/images/fallback.png';
 
-export const Image = memo<ImageProps>(({ src, ...props }) => {
+export const Image = memo<IImageProps>(({ src, ...props }) => {
   const [imgSrc, setImgSrc] = useState(src);
 
   const handleFallbackImage = useCallback(() => setImgSrc(fallback), []);

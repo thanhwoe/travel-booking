@@ -58,6 +58,11 @@ const HomePage = memo<IProps>(
 
         return { previous };
       },
+      onError: (_, __, context) => {
+        if (context?.previous) {
+          queryClient.setQueryData(queryKey, context.previous);
+        }
+      },
 
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey });
