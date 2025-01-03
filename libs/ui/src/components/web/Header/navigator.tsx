@@ -37,7 +37,7 @@ const NavigatorText = styled(Text, {
       true: {
         fontWeight: 'bold',
 
-        color: '$primary10',
+        color: '#0077aa',
       },
     },
   },

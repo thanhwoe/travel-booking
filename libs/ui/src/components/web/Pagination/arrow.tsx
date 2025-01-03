@@ -14,7 +14,7 @@ export const PaginationArrow = memo<IPaginationArrowProps>(
     return isDisabled ? (
       <Icon color="$grey10" />
     ) : (
-      <Link href={href}>
+      <Link href={href} aria-label={direction === 'left' ? 'Previous' : 'Next'}>
         <Icon />
       </Link>
     );

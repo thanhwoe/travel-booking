@@ -47,7 +47,7 @@ export const CardItem = memo<IProps>(({ data, onPress, onPressFavorite }) => {
             {...(isFavorite && { color: '$red10' })}
           />
         </XStack>
-        <Heading>{name}</Heading>
+        <Heading aria-level={1}>{name}</Heading>
         <Separator w={56} mt="$3" mb="$2" />
         <XStack>
           {variants.map((variant, index) => (

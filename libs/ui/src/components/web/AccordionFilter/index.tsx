@@ -84,10 +84,10 @@ const AccordionFilter = () => {
       $gtLg={{ width: 256 }}
       value={['price', 'type']}
     >
-      {FILTERS.map((item) => {
+      {FILTERS.map((item, index) => {
         return (
           <Accordion.Item value={item.key} key={item.label}>
-            <Accordion.Trigger borderWidth={0}>
+            <Accordion.Trigger borderWidth={0} aria-controls={'tab-' + index}>
               {({ open }: { open: boolean }) => (
                 <XStack
                   {...(open && { backgroundColor: '$grey60' })}
@@ -104,11 +104,12 @@ const AccordionFilter = () => {
                 </XStack>
               )}
             </Accordion.Trigger>
-            <Accordion.HeightAnimator animation="medium">
+            <Accordion.HeightAnimator animation="medium" id={'tab-' + index}>
               <Accordion.Content animation="medium" exitStyle={{ opacity: 0 }}>
                 {item.items.map((i) => (
                   <XStack key={i.label} py="$2" gap="$1">
                     <Checkbox
+                      aria-label={i.label}
                       checked={
                         queryParams.type === i.value ||
                         queryParams.price === i.value

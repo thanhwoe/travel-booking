@@ -20,12 +20,12 @@ export default async function Template({
   const supabase = await createClient();
   const { data } = await supabase.auth.getUser();
   return (
-    <div className="min-h-screen">
+    <main className="min-h-screen" role="main">
       <Header onSignOut={signOutAction} isAuth={!!data.user} />
       {children}
       {/* <div className="w-full h-[281px]">
         <Footer />
       </div> */}
-    </div>
+    </main>
   );
 }
